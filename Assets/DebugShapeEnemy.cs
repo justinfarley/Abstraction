@@ -9,8 +9,9 @@ public class DebugShapeEnemy : AbstractShapeEnemy
         base.Awake();
         CurrentLayer = Layer.Layers.BlackStriped;
     }
-    private void Update()
+    public override void Update()
     {
+        base.Update();
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(null,0);

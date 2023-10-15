@@ -1,3 +1,4 @@
+using PathCreation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,8 +8,12 @@ public abstract class AbstractShapeEnemy : LivingEntity
     [Space(10f)]
     [Header("AbstractShapeEnemy Fields")]
     [SerializeField] public ShapeEnemyProperties properties = new();
-    public Layer.Layers CurrentLayer { get => properties.currentLayer; set => properties.currentLayer = value; }
 
+    EndOfPathInstruction endInstruction = EndOfPathInstruction.Stop;
+    public Layer.Layers CurrentLayer { get => properties.currentLayer; set => properties.currentLayer = value; }
+    public float MoveSpeed { get => properties.moveSpeed; set => properties.moveSpeed = value; }
+
+    private float progress = 0f;
     public override void Awake()
     {
         base.Awake();
@@ -18,12 +23,28 @@ public abstract class AbstractShapeEnemy : LivingEntity
     {
         UpdateGraphics();
     }
+    public virtual void Update()
+    {
+        Move();
+    }
     public override void DealDamage(IDamageable damageableEntity, float dmg)
     {
         base.DealDamage(damageableEntity, dmg);
 
     }
-    //TODO: When damaging the shapes: formula can be something like base damage * pierce, make certain layers more durable. More durable = pierce does more damage, normal dmg does less damage etc.
+    private void Move()
+    {
+        float dst;
+        progress += MoveSpeed * Time.deltaTime;
+        dst = progress / 1;
+        transform.position = properties.pathCreator.path.GetPointAtDistance(dst, endInstruction);
+        if(dst >= 1)
+        {
+            //TODO: reached end, destroy and take lives away, if lives are under...
+        }
+    }
+    //TODO: When damaging the shapes: formula can be something like base damage * poppingPower, make certain layers more durable. More durable = pierce does more damage, normal dmg does less damage etc.
+    //TODO: implement pierce -> in Projectile code, pierce of 3 = projectile can hit 3 things before dissapearing
     public override void TakeDamage(IDamageable damageDealer, float dmg)
     {
         if (!IsDamageable(this) || dmg < 0) return;
@@ -68,7 +89,9 @@ public abstract class AbstractShapeEnemy : LivingEntity
     public class ShapeEnemyProperties
     {
         [SerializeField] internal Layer.Layers currentLayer;
+        [SerializeField] internal float moveSpeed;
         [SerializeField] internal GameObject stripe;
+        [SerializeField] internal PathCreator pathCreator;
         internal Color32[] colors =
         {
             new Color32(255,255,255,255), //white
