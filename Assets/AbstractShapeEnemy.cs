@@ -56,37 +56,46 @@ public abstract class AbstractShapeEnemy : LivingEntity
         {
             //TODO: reached end, destroy and take lives away, if lives are under...
             //print(GameManager.Instance.CurrentLevel.Properties.Lives + " ====> LIVES BEFORE");
-            TakeLives(Layer.GetNumLives(CurrentLayer));
+            GameManager.Instance.TakeLives(Layer.GetNumLives(CurrentLayer));
             //print(GameManager.Instance.CurrentLevel.Properties.Lives + " ====> LIVES AFTER");
             OnDeath?.Invoke();
         }
     }
+
     //TODO: When damaging the shapes: formula can be something like base damage * poppingPower, make certain layers more durable. More durable = pierce does more damage, normal dmg does less damage etc.
     //TODO: implement pierce -> in Projectile code, pierce of 3 = projectile can hit 3 things before dissapearing
     public override void TakeDamage(IDamageable damageDealer, float dmg)
     {
         if (dmg < 0) return;
         if (CurrentState == State.Invulnerable) return;
-        if (Health - dmg < 0)
-        {
-            dmg -= Mathf.Abs(Health - dmg);
-        }
-        if (damageDealer != null)
-            damageDealer.DamageGiven += dmg;
-        DamageTaken += dmg;
         if (CurrentLayer == Layer.Layers.White)
         {
             //kill shape
             print("killed");
+            if (damageDealer != null)
+                damageDealer.DamageGiven += 1;
+            DamageTaken += 1;
+            GameManager.Instance.AddMoney(1);
             OnDeath?.Invoke();
             return;
         }
-        print("Old Health " + Health);
-        Health -= dmg;
-        print("New Health " + Health);
+        float leftoverDamage = 0;
+        if (Health - dmg < 0)
+        {
+            leftoverDamage = Mathf.Abs(Health - dmg);
+        }
+        if (damageDealer != null)
+            damageDealer.DamageGiven += dmg - leftoverDamage;
+        DamageTaken += dmg - leftoverDamage;
+        Health -= dmg - leftoverDamage;
+        GameManager.Instance.AddMoney((int)(dmg - leftoverDamage));
         if (Health <= 0)
         {
             OnLayerSwap?.Invoke();
+            if(leftoverDamage > 0)
+            {
+                TakeDamage(damageDealer, leftoverDamage);
+            }
         }
 
     }
@@ -132,12 +141,7 @@ public abstract class AbstractShapeEnemy : LivingEntity
             Properties._stripe.SetActive(true);
         }
     }
-    private void TakeLives(int num)
-    {
-        AbstractLevel.LevelProperties props = GameManager.Instance.CurrentLevel.Properties;
-        props.Lives -= num;
-        GameManager.Instance.CurrentLevel.Properties = props;
-    }
+
     [Serializable]
     public class ShapeEnemyProperties
     {

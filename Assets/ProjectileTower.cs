@@ -27,8 +27,11 @@ public class ProjectileTower : Tower
         //send towards the target shape
         Projectile projectile = Projectile.Instantiate(_projectile, _projectileSpawnPos, Quaternion.identity, this);
         projectile.name = $"{Properties._damageTypes} Projectile";
-        projectile.Properties._target = NextAttackableShape.transform;
-        projectile.Properties._dir = NextAttackableShape.transform.position - transform.position;
+        if (NextAttackableShape)
+        {
+            projectile.Properties._target = NextAttackableShape.transform;
+            projectile.Properties._dir = NextAttackableShape.transform.position - transform.position;
+        }
     }
     public override void OnDrawGizmos()
     {

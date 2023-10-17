@@ -7,17 +7,21 @@ public abstract class AbstractLevel : MonoBehaviour
 {
     [SerializeField] protected LevelProperties _levelProperties;
     public LevelProperties Properties { get => _levelProperties; set => _levelProperties = value; }
+
+
     public virtual void Awake()
     {
-
     }
     public virtual void Start()
     {
         GameManager.Instance.CurrentLevel = this;
+        LevelProperties props = GameManager.Instance.CurrentLevel.Properties;
+        props.Cash = Properties.StartingCash;
+        GameManager.Instance.CurrentLevel.Properties = props;
     }
 
     [Serializable]
-    public struct LevelProperties
+    public class LevelProperties
     {
         [SerializeField] internal string _name;
         [SerializeField] internal string _description;
@@ -28,6 +32,8 @@ public abstract class AbstractLevel : MonoBehaviour
             _name = "";
             _description = "";
             _finalRound = 0;
+            _cash = 0;
+            _startingCash = 500;
             switch (this._mode)
             {
                 case Mode.Baby:
@@ -93,8 +99,26 @@ public abstract class AbstractLevel : MonoBehaviour
             };
         }
         [SerializeField] internal Mode _mode;
+        public Action OnCashAmountChanged;
+        public Action OnLivesAmountChanged;
         private int _lives;
-        public int Lives { get => _lives; set => _lives = value;}
+        public int Lives { get => _lives; set
+            {
+                _lives = value;
+                OnLivesAmountChanged?.Invoke();
+            }
+        }
+        private int _cash;
+        public int Cash 
+        {
+            get => _cash; 
+            set 
+            { 
+                _cash = value;
+                OnCashAmountChanged?.Invoke();
+            } }
+        private int _startingCash;
+        public int StartingCash { get => _startingCash; set => _startingCash = value; }
     }
     internal static List<Round> _rounds = new List<Round>()
     {

@@ -38,12 +38,13 @@ public abstract class Tower : LivingEntity
             transform.right = _nextAttackableShape.transform.position - transform.position;
         }
     }
-    protected void Init_Tower(float attackSpeed, float attackRadius, float attackDamage, DamageTypes damageType, int pierce, TowerProperties.AttackType attackType, GameObject projectilePrefab, float projectileSpeed)
+    protected void Init_Tower(float attackSpeed, float attackRadius, float attackDamage, List<DamageTypes> damageTypes, int pierce, TowerProperties.AttackType attackType, GameObject projectilePrefab, float projectileSpeed)
     {
         Properties._attackSpeed = attackSpeed;
         Properties._attackRadius = attackRadius;
         Properties._attackDamage = attackDamage;
-        Properties._damageTypes.Add(damageType);
+        foreach(var i in damageTypes)
+            Properties._damageTypes.Add(i);
         Properties._projectilePierce = pierce;
         Properties._attackType = attackType;
         Properties._projectileSpeed = projectileSpeed;
@@ -206,9 +207,10 @@ public abstract class Tower : LivingEntity
                 if (_shapesInRange == null) return false;
                 if(_shapesInRange.Count <= 0) return false;
                 return true;
-            });
+            }); 
             //attack
-            print($"Next damageable: {_nextAttackableShape.name}");
+            if(_nextAttackableShape)
+                print($"Next damageable: {_nextAttackableShape.name}");
             Attack();
             //DealDamage(_nextAttackableShape, Properties._attackDamage, Properties._damageType);
             yield return new WaitForSeconds(Properties._attackSpeed);
