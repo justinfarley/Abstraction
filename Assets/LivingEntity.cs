@@ -9,14 +9,13 @@ public abstract class LivingEntity : Entity, IDamageable
         Hostile,
     }
     public Hostility EntityHostility { get; set; }
-    public float MaxHealth { get; set; }
     public float Health { get; set; }
-    public float DamageGiven { get => damageGiven; set => damageGiven = value; }
+    public float DamageGiven { get => _damageGiven; set => _damageGiven = value; }
 
-    private float damageGiven;
-    public float DamageTaken { get => damageTaken; set => damageTaken = value; }
+    private float _damageGiven;
+    public float DamageTaken { get => _damageTaken; set => _damageTaken = value; }
 
-    private float damageTaken;
+    private float _damageTaken;
 
     public Action OnDeath;
 
@@ -28,28 +27,32 @@ public abstract class LivingEntity : Entity, IDamageable
     private void Init_LivingEntity()
     {
         OnDeath = null;
-        Health = MaxHealth;
         CurrentState = State.Alive;
         OnDeath += () => CurrentState = State.Dead;
     }
     public virtual void TakeDamage(IDamageable damageDealer, float dmg)
     {
-        if (!IsDamageable(this) || dmg < 0) return;
+        if (dmg < 0) return;
         if (CurrentState == State.Invulnerable) return;
+        print("Old Health " + Health);
+        if (Health - dmg < 0)
+        {
+            dmg -= Mathf.Abs(Health - dmg);
+        }
         Health -= dmg;
-        if(damageDealer != null)
+        print("New Health " + Health);
+        if (damageDealer != null)
             damageDealer.DamageGiven += dmg;
         DamageTaken += dmg;
-        if (Health < 0)
+        if (Health <= 0)
         {
-            Health = 0;
             OnDeath?.Invoke();
         }
     }
 
     public virtual void DealDamage(IDamageable damageableEntity, float dmg)
     {
-        if (!IsDamageable(this) || dmg < 0) return;
+        if (dmg < 0) return;
         damageableEntity.TakeDamage(this, dmg);
     }
 }
