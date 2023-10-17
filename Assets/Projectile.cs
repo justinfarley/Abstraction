@@ -78,6 +78,10 @@ public class Projectile : Entity, IDamageable
                 DealDamage(enemy, _towerProperties._damageTypes);
         }
     }
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
     [Serializable]
     public struct ProjectileProperties
     {
