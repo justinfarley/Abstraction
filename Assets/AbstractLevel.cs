@@ -11,10 +11,12 @@ public abstract class AbstractLevel : MonoBehaviour
 
     public virtual void Awake()
     {
+
     }
     public virtual void Start()
     {
         GameManager.Instance.CurrentLevel = this;
+        GameUtils.GLOBAL_UPGRADE_COST_MULTIPLIER = GameUtils.PriceMultipliers[GameManager.Instance.CurrentLevel._levelProperties._mode];
         LevelProperties props = GameManager.Instance.CurrentLevel.Properties;
         props.Cash = Properties.StartingCash;
         GameManager.Instance.CurrentLevel.Properties = props;
@@ -163,5 +165,31 @@ public abstract class AbstractLevel : MonoBehaviour
             },Round.WaveSpawnType.Together
             ),
         //Round 7:
+        new Round(
+        new List<Round.Wave>(){
+                 Round.MakeWave(5, 5f, Layer.Layers.Red),
+            },Round.WaveSpawnType.Seperate
+            ),
+        //Round 8:
+        new Round(
+        new List<Round.Wave>(){
+                 Round.MakeWave(5, 5f, Layer.Layers.Red),
+                 Round.MakeWave(10, 2.5f, Layer.Layers.Red),
+            },Round.WaveSpawnType.Seperate
+            ),
+        //Round 9:
+        new Round(
+        new List<Round.Wave>(){
+                 Round.MakeWave(5, 1f, Layer.Layers.Green),
+            },Round.WaveSpawnType.Seperate
+            ),
+        //Round 10:
+        new Round(
+        new List<Round.Wave>(){
+                 Round.MakeWave(5, 2f, Layer.Layers.Green),
+                 Round.MakeWave(10, 1f, Layer.Layers.Red),
+                 Round.MakeWave(25, 0.5f, Layer.Layers.White),
+            },Round.WaveSpawnType.Together
+            ),
     };
 }

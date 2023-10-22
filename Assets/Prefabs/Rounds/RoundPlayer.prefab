@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1203497666946849842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1203497666946849844}
+  - component: {fileID: 1203497666946849845}
+  m_Layer: 0
+  m_Name: RoundPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1203497666946849844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203497666946849842}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.5309727, y: -0.016446322, z: -0.012460162}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1203497666946849845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203497666946849842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d6c9d9f4520984a83f7e8f34c29896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startRound: 2
+  _prefabPairs:
+  - _layer: 1
+    _prefab: {fileID: 2666691792321305079, guid: 65d12a2c252e3224091a5c9f0fd84f74, type: 3}
+  - _layer: 2
+    _prefab: {fileID: 8777935706891022224, guid: 4359e0006298d804ca2045ddbde645ca, type: 3}
+  - _layer: 3
+    _prefab: {fileID: 8777935706891022224, guid: 067edfc78ec22c947bf46343604e8dd8, type: 3}
+  - _layer: 4
+    _prefab: {fileID: 8777935706891022224, guid: c76d00351df93bc40ac4d0d40a569d6c, type: 3}
+  - _layer: 5
+    _prefab: {fileID: 8777935706891022224, guid: 701b394b5b50a164f871003d5d0d3607, type: 3}

@@ -8,7 +8,7 @@ public abstract class AbstractShapeEnemy : LivingEntity
     [Space(10f)]
     [Header("AbstractShapeEnemy Fields")]
     [SerializeField] public ShapeEnemyProperties Properties = new();
-
+    private PlayRound _round;
     private readonly EndOfPathInstruction _endInstruction = EndOfPathInstruction.Stop;
     public Layer.Layers CurrentLayer { get => Properties._currentLayer; set => Properties._currentLayer = value; }
     public float MoveSpeed { get => Properties._moveSpeed; set => Properties._moveSpeed = value; }
@@ -32,6 +32,7 @@ public abstract class AbstractShapeEnemy : LivingEntity
     }
     private void Start()
     {
+        _round = FindObjectOfType<PlayRound>();
         Path = FindObjectOfType<PathCreator>();
         MoveSpeed = Layer._layerSpeeds[CurrentLayer];
         Health = Layer._layerHealths[CurrentLayer];
@@ -49,10 +50,10 @@ public abstract class AbstractShapeEnemy : LivingEntity
     private void Move()
     {
         float dst;
-        _progress += MoveSpeed * GameUtils.GLOBAL_SPEED_MULTIPLIER *Time.deltaTime;
-        dst = _progress / 1;
-        transform.position = Properties._pathCreator.path.GetPointAtDistance(_progress / 1f, _endInstruction);
-        if((_progress / 1f) >= Properties._pathCreator.path.length)
+        _progress += MoveSpeed * GameUtils.GLOBAL_SPEED_MULTIPLIER * Time.deltaTime;
+        dst = _progress;
+        transform.position = Properties._pathCreator.path.GetPointAtDistance(_progress, _endInstruction);
+        if((_progress) >= Properties._pathCreator.path.length)
         {
             //TODO: reached end, destroy and take lives away, if lives are under...
             //print(GameManager.Instance.CurrentLevel.Properties.Lives + " ====> LIVES BEFORE");
@@ -101,7 +102,6 @@ public abstract class AbstractShapeEnemy : LivingEntity
     }
     public void TakeDamage(IDamageable damageDealer, float dmg, List<DamageTypes> damageTypes)
     {
-        print(!CanBeDamaged(damageTypes) + $" can be damaged by {damageTypes} from {damageDealer}?");
         if (!CanBeDamaged(damageTypes)) return;
         else TakeDamage(damageDealer, dmg);
     }
@@ -119,11 +119,28 @@ public abstract class AbstractShapeEnemy : LivingEntity
     }
     public virtual void SwitchLayer()
     {
+        CheckSpawnExtraShapes(CurrentLayer);
         CurrentLayer--;
         MoveSpeed = Layer._layerSpeeds[CurrentLayer];
         Health = Layer._layerHealths[CurrentLayer];
         UpdateGraphics();
     }
+
+    private void CheckSpawnExtraShapes(Layer.Layers currentLayer)
+    {
+        int numSplits = Layer._layerSplitCounts[currentLayer];
+        numSplits--;
+        if(numSplits <= 0 || currentLayer == Layer.Layers.White) return;
+        for (int i = 0; i < numSplits; i++)
+        {
+            AbstractShapeEnemy newShape = Instantiate(_round.PrefabPairs[(int)currentLayer - 2]._prefab, Vector3.zero, Quaternion.identity).GetComponent<AbstractShapeEnemy>();
+            float buffer = 0.5f;
+            newShape.Progress = Progress - (buffer * (i+1));
+            newShape.name = "Split";
+        }   
+        
+    }
+
     private void UpdateGraphics()
     {
         //update graphics
@@ -136,19 +153,22 @@ public abstract class AbstractShapeEnemy : LivingEntity
         {
             print(Properties.colors[(int)(CurrentLayer - 12)]);
             SpriteRenderer.color = Properties.colors[(int)(CurrentLayer - 12)];
-            print("Striped " + CurrentLayer.ToString());
             //enable stripe on it
             Properties._stripe.SetActive(true);
         }
+    }
+    public bool IsCamo()
+    {
+        return Properties._shapeVariant == ShapeEnemyProperties.ShapeVariant.Camo;
     }
 
     [Serializable]
     public class ShapeEnemyProperties
     {
-        [SerializeField] internal Layer.Layers _currentLayer;
-        [SerializeField] internal float _moveSpeed;
+        internal Layer.Layers _currentLayer;
+        internal float _moveSpeed;
+        internal PathCreator _pathCreator;
         [SerializeField] internal GameObject _stripe;
-        [SerializeField] internal PathCreator _pathCreator;
         [SerializeField] internal List<DamageTypes> _typesToBeDamagedBy;
         [SerializeField] internal ShapeVariant _shapeVariant;
         public enum ShapeVariant

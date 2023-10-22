@@ -66,7 +66,10 @@ public class Projectile : Entity, IDamageable
     {
         if (Properties._dir == null) return;
         EntityRigidbody.velocity = _speed * Properties._dir;
-
+        if(Vector2.Distance(Properties._sourceParent.transform.position, transform.position) >= Properties._distBeforeDespawn)
+        {
+            Destroy(gameObject);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -88,5 +91,7 @@ public class Projectile : Entity, IDamageable
         [SerializeField] internal Transform _target;
         internal Tower _sourceParent;
         internal Vector2 _dir;
+        internal float _distBeforeDespawn;
+
     }
 }

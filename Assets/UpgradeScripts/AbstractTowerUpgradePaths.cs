@@ -6,22 +6,34 @@ public abstract class AbstractTowerUpgradePaths : MonoBehaviour
     [Space(10f)]
     [Header("Upgrade Path Fields")]
     [SerializeField] protected Tower _tower;
-    [SerializeField] protected AbstractUpgrade[] _topPath = new AbstractUpgrade[3];
-    [SerializeField] protected AbstractUpgrade[] _middlePath = new AbstractUpgrade[3];
-    [SerializeField] protected AbstractUpgrade[] _bottomPath = new AbstractUpgrade[3];
+    [SerializeField] protected Upgrade[] _topPath = new Upgrade[4];
+    [SerializeField] protected Upgrade[] _middlePath = new Upgrade[4];
+    [SerializeField] protected Upgrade[] _bottomPath = new Upgrade[4];
     protected int _topPathIndex = 0;
     protected int _middlePathIndex= 0;
     protected int _bottomPathIndex = 0;
-    public virtual void BuyNextUpgrade(AbstractUpgrade[] path, ref int nextIndex)
+    public virtual void BuyNextUpgrade(Upgrade[] path, ref int nextIndex)
     {
-        if (GameManager.Instance.CurrentLevel.Properties.Cash < path[nextIndex].Properties._price) return; //guard clause
-        GameManager.Instance.AddMoney(-path[nextIndex].Properties._price);
-        _tower.Properties._attackDamage += path[nextIndex].Properties._damageIncrease;
-        _tower.Properties._attackRadius += path[nextIndex].Properties._rangeIncrease;
-        _tower.Properties._attackSpeed += path[nextIndex].Properties._attackSpeedIncrease;
-        foreach(var dmgType in path[nextIndex].Properties._damageTypesToAdd)
+        if (GameManager.Instance.CurrentLevel.Properties.Cash < path[nextIndex].Price) return; //guard clause
+        GameManager.Instance.AddMoney(-path[nextIndex].Price);
+        _tower.Properties._attackDamage += path[nextIndex].DamageIncrease;
+
+        print(_tower.Properties._attackRadius);
+        _tower.Properties._attackRadius += path[nextIndex].RangeIncrease;
+        _tower.Properties._radius.transform.localScale = new Vector3(_tower.Properties._attackRadius, _tower.Properties._attackRadius, _tower.Properties._attackRadius);
+        print(_tower.Properties._attackRadius);
+
+        _tower.Properties._attackSpeed -= path[nextIndex].AttackDelayDecrease;
+        _tower.Properties._projectileSpeed += path[nextIndex].ProjectileSpeedIncrease;
+        _tower.Properties._projectileTravelDistance += path[nextIndex].ProjectileTravelDistanceIncrease;
+        if (!_tower.Properties._canHitCamo) //only change if you couldnt before the upgrade
         {
-            _tower.Properties._damageTypes.Add(dmgType);
+            _tower.Properties._canHitCamo = path[nextIndex].canHitCamo;
+        }
+        foreach(var dmgType in path[nextIndex].DamageTypesToAdd)
+        {
+            if(!_tower.Properties._damageTypes.Contains(dmgType))
+                _tower.Properties._damageTypes.Add(dmgType);
         }
         nextIndex++;
     }

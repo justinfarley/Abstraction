@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2666691792282603598}
   - component: {fileID: 2666691792282603599}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stripe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2666691792321305077}
   - component: {fileID: 2666691792321305075}
   - component: {fileID: -4782208678043291939}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WhiteTriangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,17 +186,14 @@ MonoBehaviour:
   entityProperties:
     _name: 
     _entityRigidbody: {fileID: 0}
-    _entityCollider: {fileID: 0}
+    _entityCollider: {fileID: -4782208678043291939}
     _sprite: {fileID: 0}
     _spriteRenderer: {fileID: 2666691792321305077}
     _type: 2
     _state: 1
     _animator: {fileID: 0}
   Properties:
-    _currentLayer: 0
-    _moveSpeed: 0
     _stripe: {fileID: 2666691792282603601}
-    _pathCreator: {fileID: 0}
     _typesToBeDamagedBy: 00000000
     _shapeVariant: 0
 --- !u!61 &-4782208678043291939

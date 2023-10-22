@@ -22,6 +22,7 @@ public class ProjectileTower : Tower
     }
     public override void Attack()
     {
+        if (NextAttackableShape == null) return;
         //spawn projectile
         //parent projectile to this gameobject
         //send towards the target shape
@@ -31,6 +32,7 @@ public class ProjectileTower : Tower
         {
             projectile.Properties._target = NextAttackableShape.transform;
             projectile.Properties._dir = NextAttackableShape.transform.position - transform.position;
+            projectile.Properties._distBeforeDespawn = Properties._projectileTravelDistance;
         }
     }
     public override void OnDrawGizmos()

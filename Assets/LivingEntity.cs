@@ -34,13 +34,11 @@ public abstract class LivingEntity : Entity, IDamageable
     {
         if (dmg < 0) return;
         if (CurrentState == State.Invulnerable) return;
-        print("Old Health " + Health);
         if (Health - dmg < 0)
         {
             dmg -= Mathf.Abs(Health - dmg);
         }
         Health -= dmg;
-        print("New Health " + Health);
         if (damageDealer != null)
             damageDealer.DamageGiven += dmg;
         DamageTaken += dmg;

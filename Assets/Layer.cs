@@ -2,6 +2,40 @@ using System.Collections.Generic;
 
 public static class Layer
 {
+    internal static Dictionary<Layers, int> _layerSplitCounts = new Dictionary<Layers, int>()
+    {
+        { Layers.White, 1 },
+        { Layers.Yellow, 1 },
+        { Layers.Blue, 1 },
+        { Layers.Red, 1 },
+        { Layers.Green, 1 },
+        { Layers.Orange, 1 },
+        { Layers.Pink, 1 },
+        { Layers.Brown, 2 },
+        { Layers.Purple, 1 },
+        { Layers.Silver, 2 },
+        { Layers.Black, 2 },
+        { Layers.WhiteStriped, 1 },
+        { Layers.YellowStriped, 1 },
+        { Layers.BlueStriped, 1 },
+        { Layers.RedStriped, 1 },
+        { Layers.GreenStriped, 1 },
+        { Layers.OrangeStriped, 1 },
+        { Layers.PinkStriped, 1 },
+        { Layers.BrownStriped, 2 },
+        { Layers.PurpleStriped, 1 },
+        { Layers.SilverStriped, 2 },
+        { Layers.BlackStriped, 2 },
+        { Layers.BlueDiamond, 4 },
+        { Layers.RedDiamond, 4 },
+        { Layers.GreenDiamond, 2 },
+        { Layers.BlackDiamond, 2 },
+        { Layers.BlueDiamondStriped, 4 },
+        { Layers.RedDiamondStriped,  4},
+        { Layers.GreenDiamondStriped, 2 },
+        { Layers.BlackDiamondStriped, 2 },
+        { Layers.GiantDiamond, 5 },
+    };
     internal static Dictionary<Layers, float> _layerHealths = new Dictionary<Layers, float>()
     {
         { Layers.White, 1f },

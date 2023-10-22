@@ -95,9 +95,9 @@ GameObject:
   - component: {fileID: 8777935706891022229}
   - component: {fileID: 8777935706891022226}
   - component: {fileID: 6165808794187908430}
-  - component: {fileID: -6975455338787320121}
+  - component: {fileID: 2910322131961872069}
   m_Layer: 6
-  m_Name: BlueTriangle
+  m_Name: RedTriangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -197,7 +197,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.87062633}
   m_EdgeRadius: 0
---- !u!114 &-6975455338787320121
+--- !u!114 &2910322131961872069
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,11 +206,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8777935706891022224}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3cb844e8791a1e45a9be2b46c4c683b, type: 3}
+  m_Script: {fileID: 11500000, guid: 584c96cd78316d9459687b2cbabf7d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   entityProperties:
-    _name: Blue Triangle
+    _name: Red Triangle
     _entityRigidbody: {fileID: 0}
     _entityCollider: {fileID: 6165808794187908430}
     _sprite: {fileID: 0}

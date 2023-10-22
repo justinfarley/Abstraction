@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class PlayRound : MonoBehaviour
 {
-    private AbstractLevel _level;
+    [SerializeField] private AbstractLevel _level;
     private int _numRounds;
+    [SerializeField] private int _startRound = 2;
     [Serializable]
     public struct LayerPrefabPair
     {
@@ -14,13 +15,11 @@ public class PlayRound : MonoBehaviour
         [SerializeField] internal GameObject _prefab;
     }
     [SerializeField] private List<LayerPrefabPair> _prefabPairs;
+    public List<LayerPrefabPair> PrefabPairs { get => _prefabPairs; set => _prefabPairs = value; }
 
     void Start()
     {
-        _level = GameManager.Instance.CurrentLevel;
-        //numRounds = level.Properties.finalRound;
-        _numRounds = 5;
-        StartGame();
+        StartCoroutine(Init_cr());
     }
 
     void Update()
@@ -31,14 +30,29 @@ public class PlayRound : MonoBehaviour
     {
         StartCoroutine(RoundIterator_cr());
     }
+    private IEnumerator Init_cr()
+    {
+        yield return new WaitUntil(() =>
+        {
+            if(GameManager.Instance.CurrentLevel != null)
+            {
+                return true;
+            }
+            return false;
+        });
+        _level = GameManager.Instance.CurrentLevel;
+        _numRounds = _level.Properties._finalRound;
+        StartGame();
+    }
     private IEnumerator RoundIterator_cr()
     {
-        for(int i = 0; i < _numRounds; i++)
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) && GameManager.Instance.CurrentShapesOnScreen.Count <= 0);
+        for (int i = _startRound - 1; i < _numRounds; i++)
         {
             StartRound(AbstractLevel._rounds[i]);
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) && GameManager.Instance.CurrentShapesOnScreen.Count <= 0);
         }
-        print("finished all rounds for this difficulty");
+        print($"finished all rounds for {_level.Properties._mode} difficulty");
     }
     private void StartRound(Round round)
     {
@@ -112,7 +126,7 @@ public class PlayRound : MonoBehaviour
             yield return new WaitForSeconds(wave.timeBetweenSpawns);
         }
     }
-    private void MakeShape(GameObject prefab, Layer.Layers layer, int namingNumber)
+    private static void MakeShape(GameObject prefab, Layer.Layers layer, int namingNumber)
     {
         AbstractShapeEnemy newShape = Instantiate(prefab).GetComponent<AbstractShapeEnemy>();
         newShape.gameObject.name = layer.ToString() + " triangle " + namingNumber;
