@@ -11,5 +11,6 @@ public class SpikeTower : ProjectileTower
     new List<DamageTypes> { DamageTypes.Spikes }, 2, TowerProperties.Targeting.First,
     _projectile, 5f, 4.5f);
         _projectileSpawnOffset = new Vector2(_projectileOffset, _projectileOffset);
+        Name = "SpikeTower";
     }
 }

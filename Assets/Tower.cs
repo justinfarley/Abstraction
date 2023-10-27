@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,6 +15,7 @@ public abstract class Tower : LivingEntity
     private List<AbstractShapeEnemy> _shapesInRange;
     private AbstractShapeEnemy _nextAttackableShape;
     private Collider2D[] _hits;
+    private int[] _upgrades = { 0, 0, 0 };
     public Color GizmosColor { get => _gizmosColor; set => _gizmosColor = value; }
     public AbstractShapeEnemy NextAttackableShape { get => _nextAttackableShape; set => _nextAttackableShape = value; }
     public override void Awake()
@@ -54,19 +56,34 @@ public abstract class Tower : LivingEntity
     {
         if (Input.GetMouseButtonDown(0))
         {
-            print("rizz");
+            //TODO: refactor to be a raycast at the mouse position and if it hits this towers collider then call TowerSelected.
+            if(Input.mousePosition.x > (Screen.width / 5f) * 4)
+                return;
             Vector2 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (Vector2.Distance(point, transform.position) < 0.5f)
             {
-                Properties._isSelected = true;
-                Properties._radius.SetActive(true);
+                TowerSelected();
             }
             else
             {
-                Properties._isSelected = false;
-                Properties._radius.SetActive(false);
+                TowerDeselected();
             }
         }
+    }
+    private void TowerSelected()
+    {
+        if (Properties._isSelected) return;
+        Properties._isSelected = true;
+        Properties._radius.SetActive(true);
+        UpgradeGUI.SetCurrentTower(this);
+    }
+    private void TowerDeselected()
+    {
+        if (!Properties._isSelected) return;
+        Properties._isSelected = false;
+        Properties._radius.SetActive(false);
+        UpgradeGUI.SetCurrentTower(null);
+
     }
     protected void Init_Tower(float attackSpeed, float attackRadius, float attackDamage, List<DamageTypes> damageTypes, int pierce, TowerProperties.Targeting attackType, GameObject projectilePrefab, float projectileSpeed, float travelDistance)
     {
@@ -109,6 +126,10 @@ public abstract class Tower : LivingEntity
                 if(Properties._canHitCamo)
                     return shapesInRange[i];
             }
+            else
+            {
+                return shapesInRange[i];
+            }
         }
         return null;
     }
@@ -121,6 +142,10 @@ public abstract class Tower : LivingEntity
             {
                 if (Properties._canHitCamo)
                     return shapesInRange[i];
+            }
+            else
+            {
+                return shapesInRange[i];
             }
         }
         return null;
@@ -264,6 +289,22 @@ public abstract class Tower : LivingEntity
             //DealDamage(_nextAttackableShape, Properties._attackDamage, Properties._damageType);
             yield return new WaitForSeconds(Properties._attackSpeed);
         }
+    }
+    public int[] GetUpgrades()
+    {
+        return _upgrades;
+    }
+    public int GetTopPathIndex()
+    {
+        return _upgrades[0];
+    }
+    public int GetMiddlePathIndex()
+    {
+        return _upgrades[1];
+    }
+    public int GetBottomPathIndex()
+    {
+        return _upgrades[2];
     }
     public virtual void OnDrawGizmos()
     {

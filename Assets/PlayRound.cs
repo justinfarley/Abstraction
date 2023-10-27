@@ -2,12 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayRound : MonoBehaviour
 {
     [SerializeField] private AbstractLevel _level;
+    [SerializeField] private GameObject _playButton, _fastForwardButton;
     private int _numRounds;
     [SerializeField] private int _startRound = 2;
+    private Toggle _fastForwardSpeed;
+    private Button _play;
+    private bool _isOn = false;
+    private bool _wasClicked = false;
+    private const float _fastTime = 2f;
+    private const float _normalTime = 1f;
     [Serializable]
     public struct LayerPrefabPair
     {
@@ -16,18 +24,48 @@ public class PlayRound : MonoBehaviour
     }
     [SerializeField] private List<LayerPrefabPair> _prefabPairs;
     public List<LayerPrefabPair> PrefabPairs { get => _prefabPairs; set => _prefabPairs = value; }
+    private void Awake()
+    {
+        _play = _playButton.GetComponent<Button>();
+        _play.onClick.AddListener(StartGame);
+        _fastForwardSpeed = _fastForwardButton.GetComponent<Toggle>();
+        _fastForwardButton.SetActive(false);
+    }
 
     void Start()
     {
         StartCoroutine(Init_cr());
     }
+    private void Update()
+    {
 
-    void Update()
-    {
-        
     }
-    private void StartGame()
+    public void ToggleTime()
     {
+        //TODO: most likely refactor the fuck out of this
+        if (!_fastForwardButton.activeSelf) return;
+
+        if (_fastForwardSpeed.isOn)
+        {
+            _isOn = true;
+            Time.timeScale = _fastTime;
+        }
+        else
+        {
+            _isOn = false;
+            Time.timeScale = _normalTime;
+        }
+    }
+    public void StartGame()
+    {
+        _play = _playButton.GetComponent<Button>();
+        _play.onClick.RemoveAllListeners();
+
+        _play.onClick.AddListener(WasClicked);
+        _playButton.SetActive(false);
+        _fastForwardButton.SetActive(true);
+        _fastForwardSpeed = _fastForwardButton.GetComponent<Toggle>();
+        _fastForwardSpeed.isOn = false; //isOn = false means 1x speed, if its on set Time.timeScale to 2
         StartCoroutine(RoundIterator_cr());
     }
     private IEnumerator Init_cr()
@@ -42,20 +80,38 @@ public class PlayRound : MonoBehaviour
         });
         _level = GameManager.Instance.CurrentLevel;
         _numRounds = _level.Properties._finalRound;
-        StartGame();
+        //StartGame();
     }
     private IEnumerator RoundIterator_cr()
     {
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) && GameManager.Instance.CurrentShapesOnScreen.Count <= 0);
         for (int i = _startRound - 1; i < _numRounds; i++)
         {
+            _wasClicked = false;
             StartRound(AbstractLevel._rounds[i]);
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) && GameManager.Instance.CurrentShapesOnScreen.Count <= 0);
+            print("waiting for canstartround");
+            yield return new WaitUntil(GameManager.Instance.CanStartNextRound);
+            print("setting stuff active again");
+            Time.timeScale = _normalTime;
+            _playButton.SetActive(true);
+            _fastForwardButton.SetActive(false);
+            GameManager.Instance.AddMoney(100 + (i + 1)); //add 100 + round num
+            print("WAITING FOR BUTTON PRESS");
+            yield return new WaitUntil(() => _wasClicked);
+            print("NEXT");
         }
         print($"finished all rounds for {_level.Properties._mode} difficulty");
     }
+    public void WasClicked()
+    {
+        _wasClicked = true;
+    }
     private void StartRound(Round round)
     {
+        _playButton.SetActive(false);
+        _fastForwardButton.SetActive(true);
+        _fastForwardSpeed.isOn = _isOn;
+        if (_isOn) Time.timeScale = _fastTime;
+        GameManager.Instance.CurrentRound = round;
         switch (round.SpawnType)
         {
             case Round.WaveSpawnType.Seperate:
@@ -98,7 +154,12 @@ public class PlayRound : MonoBehaviour
                 yield return new WaitForSeconds(round[i].timeBetweenSpawns);
             }
         }
-        if (numWaves >= round.GetWavesInRound().Count) yield break;
+        if (numWaves >= round.GetWavesInRound().Count)
+        {
+            print("done spawning everything");
+            round.DoneSpawning = true;
+            yield break;
+        }
         else
         {
             for (int i = numWaves; i < round.GetWavesInRound().Count; i++)
@@ -106,6 +167,9 @@ public class PlayRound : MonoBehaviour
                 StartCoroutine(SpawnWave_cr(round[i]));
             }
         }
+        //done spawning everything, round over.
+        print("done spawning everything");
+        round.DoneSpawning = true;
     }
     private IEnumerator SpawnWave_cr(Round.Wave wave)
     {

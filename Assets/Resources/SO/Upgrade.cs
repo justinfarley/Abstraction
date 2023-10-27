@@ -16,4 +16,5 @@ public class Upgrade : ScriptableObject
     public float ProjectileTravelDistanceIncrease;
     public List<DamageTypes> DamageTypesToAdd;
     public bool canHitCamo = false;
+    public Sprite upgradeSprite;
 }

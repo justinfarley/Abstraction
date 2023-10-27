@@ -5,10 +5,10 @@ public abstract class AbstractTowerUpgradePaths : MonoBehaviour
     //START WITH 3 UPGRADES PER PATH
     [Space(10f)]
     [Header("Upgrade Path Fields")]
-    [SerializeField] protected Tower _tower;
-    [SerializeField] protected Upgrade[] _topPath = new Upgrade[4];
-    [SerializeField] protected Upgrade[] _middlePath = new Upgrade[4];
-    [SerializeField] protected Upgrade[] _bottomPath = new Upgrade[4];
+    [SerializeField] protected static Tower _tower;
+    [SerializeField] protected Upgrade[] _topPath;
+    [SerializeField] protected Upgrade[] _middlePath;
+    [SerializeField] protected Upgrade[] _bottomPath;
     protected int _topPathIndex = 0;
     protected int _middlePathIndex= 0;
     protected int _bottomPathIndex = 0;
@@ -36,5 +36,6 @@ public abstract class AbstractTowerUpgradePaths : MonoBehaviour
                 _tower.Properties._damageTypes.Add(dmgType);
         }
         nextIndex++;
+        UpgradeGUI.OnCurrentTowerUpdated?.Invoke();
     }
 }

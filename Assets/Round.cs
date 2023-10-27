@@ -8,6 +8,8 @@ public class Round
     [SerializeField] private List<Wave> _wavesInRound = new();
     [SerializeField] private int _currentWave;
     private int _waveToSpawnTogether;
+    private bool _doneSpawning = false;
+    public bool DoneSpawning { get => _doneSpawning; set => _doneSpawning = value; }
     public int WaveToSpawnTogether { get => _waveToSpawnTogether; private set => _waveToSpawnTogether = value; }
     public enum WaveSpawnType
     {

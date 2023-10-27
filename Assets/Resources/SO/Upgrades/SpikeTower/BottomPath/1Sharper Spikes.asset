@@ -10,16 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6bb8ad582ccab04d901f98211e04759, type: 3}
-  m_Name: Spiky-er Spikes
+  m_Name: 1Sharper Spikes
   m_EditorClassIdentifier: 
-  Name: Spiky-er Spikes
-  Description: Increased pierce, damage, and higher projectile speed.
-  Price: 0
+  Name: Sharper Spikes
+  Description: Slight Damage Increase
+  Price: 225
   PierceIncrease: 0
-  DamageIncrease: 0
+  DamageIncrease: 1
   AttackDelayDecrease: 0
   RangeIncrease: 0
-  ProjectileSpeedIncrease: 2
-  ProjectileTravelDistanceIncrease: 1
   DamageTypesToAdd: 
-  canHitCamo: 0

@@ -6,7 +6,6 @@ public class SpikeTowerUpgrades : AbstractTowerUpgradePaths
 {
     private void Awake()
     {
-        _tower = GetComponent<SpikeTower>();
     }
     private void Update()
     {
