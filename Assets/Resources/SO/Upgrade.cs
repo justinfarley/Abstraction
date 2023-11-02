@@ -17,4 +17,5 @@ public class Upgrade : ScriptableObject
     public List<DamageTypes> DamageTypesToAdd;
     public bool canHitCamo = false;
     public Sprite upgradeSprite;
+    public SpecialUpgrades SpecialUpgrade = SpecialUpgrades.None;
 }

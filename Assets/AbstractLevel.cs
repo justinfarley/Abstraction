@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class AbstractLevel : MonoBehaviour
 {
+    private const AbstractShapeEnemy.ShapeEnemyProperties.ShapeVariant CAMO = AbstractShapeEnemy.ShapeEnemyProperties.ShapeVariant.Camo;
+
     [SerializeField] protected LevelProperties _levelProperties;
     public LevelProperties Properties { get => _levelProperties; set => _levelProperties = value; }
 
@@ -190,6 +192,41 @@ public abstract class AbstractLevel : MonoBehaviour
                  Round.MakeWave(10, 1f, Layer.Layers.Red),
                  Round.MakeWave(25, 0.5f, Layer.Layers.White),
             },Round.WaveSpawnType.Together
+            ),
+        //Round 11:
+        new Round(
+        new List<Round.Wave>(){
+                 Round.MakeWave(50, 0.25f, Layer.Layers.Red),
+            },Round.WaveSpawnType.Seperate
+            ),
+        //Round 12:
+        new Round(
+        new List<Round.Wave>(){
+                 Round.MakeWave(50, 0.05f, Layer.Layers.White),
+                 Round.MakeWave(10, 1f, Layer.Layers.Green),
+                 Round.MakeWave(20, 0.25f, Layer.Layers.Blue),
+            },Round.WaveSpawnType.Together
+            ),
+        //Round 13:
+        new Round(
+        new List<Round.Wave>(){
+                 Round.MakeWave(200, 0.05f, Layer.Layers.White),
+                 Round.MakeWave(20, 0.25f, Layer.Layers.Orange),
+            },Round.WaveSpawnType.Together
+            ),
+        //Round 14:
+        new Round(
+        new List<Round.Wave>(){
+                 Round.MakeWave(5, 1f, Layer.Layers.Pink),
+                 Round.MakeWave(10, 0.5f, Layer.Layers.Pink),
+                 Round.MakeWave(20, 0.25f, Layer.Layers.Pink),
+            },Round.WaveSpawnType.Seperate
+            ),
+        //Round 15:
+        new Round(
+        new List<Round.Wave>(){
+                 Round.MakeWave(1, 0f, Layer.Layers.Red, CAMO),
+            },Round.WaveSpawnType.Seperate
             ),
     };
 }

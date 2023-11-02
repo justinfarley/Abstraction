@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -70,6 +71,10 @@ public class Round
     {
         return new Wave(numShapes, timeBetweenSpawns, layer);
     }
+    public static Wave MakeWave(int numShapes, float timeBetweenSpawns, Layer.Layers layer, AbstractShapeEnemy.ShapeEnemyProperties.ShapeVariant variant)
+    {
+        return new Wave(numShapes, timeBetweenSpawns, layer, variant);
+    }
     /// <summary>
     /// Wave of shapes
     /// E.G. 5 Yellow shapes with 0.25 time between each one getting instantiated would look like this:<para></para>
@@ -84,11 +89,20 @@ public class Round
         [SerializeField] internal int shapes;
         [SerializeField] internal float timeBetweenSpawns;
         [SerializeField] internal Layer.Layers layer;
+        [SerializeField] internal AbstractShapeEnemy.ShapeEnemyProperties.ShapeVariant variant;
+        public Wave(int shapes, float timeBetweenSpawns, Layer.Layers layer, AbstractShapeEnemy.ShapeEnemyProperties.ShapeVariant variant)
+        {
+            this.shapes = shapes;
+            this.timeBetweenSpawns = timeBetweenSpawns;
+            this.layer = layer;
+            this.variant = variant;
+        }
         public Wave(int shapes, float timeBetweenSpawns, Layer.Layers layer)
         {
             this.shapes = shapes;
             this.timeBetweenSpawns = timeBetweenSpawns;
             this.layer = layer;
+            variant = AbstractShapeEnemy.ShapeEnemyProperties.ShapeVariant.Normal;
         }
     }
 }

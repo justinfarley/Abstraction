@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Globalization;
+using Unity.VisualScripting;
 
 /// <summary>
 /// USES TOWERS NAMES... SEE <see cref="Entity.Name"/> <para></para>
@@ -37,9 +38,21 @@ public class UpgradeGUI : AbstractTowerUpgradePaths
     private void Awake()
     {
         OnCurrentTowerUpdated += UpdateGUI;
+        GameManager.OnCashChanged += UpdateGUI;
+
     }
     void Start()
     {
+/*        List<Transform> immediateChildren = new List<Transform>();
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            print(i);
+            immediateChildren.Add(transform.GetChild(i));
+        }
+        foreach(var f in immediateChildren)
+        {
+            f.gameObject.SetActive(false);
+        }*/
     }
 
     void Update()
@@ -100,6 +113,13 @@ public class UpgradeGUI : AbstractTowerUpgradePaths
     }
     private void ButtonInit(GameObject b, int pathCurrentIndex, Upgrade[] upgradesOnPath)
     {
+        if (upgradesOnPath.Length <= _currentTower.GetUpgrades()[pathCurrentIndex])
+        {
+            //TODO: put like MAXED or something on that path
+            //TODO: also add logic for if 2 paths have been purchased already so it can LOCK the other one
+            //TODO: also add logic for only 3 upgrades and over on 1 path and 2 and below on 1 other one etc.
+            return;
+        }
         Button button = b.GetComponent<Button>(); 
         Image upgradeSpriteRenderer = b.transform.GetChild(1).GetComponent<Image>();
         TMP_Text buyText = b.transform.GetChild(0).GetComponent<TMP_Text>();

@@ -7,7 +7,8 @@ public class DisplayValueText : MonoBehaviour
     public enum Value
     {
         Lives,
-        Money
+        Money,
+        Round
     }
     [SerializeField] private TMP_Text _text;
     [SerializeField] private Value _value;
@@ -22,6 +23,7 @@ public class DisplayValueText : MonoBehaviour
         AbstractLevel.LevelProperties props = GameManager.Instance.CurrentLevel.Properties;
         props.OnLivesAmountChanged += UpdateText;
         props.OnCashAmountChanged += UpdateText;
+        PlayRound.OnRoundStarted += UpdateText; 
         GameManager.Instance.CurrentLevel.Properties = props;
         GameManager.Instance.CurrentLevel.Properties.OnCashAmountChanged?.Invoke();
     }
@@ -31,6 +33,7 @@ public class DisplayValueText : MonoBehaviour
         {
             Value.Money => "Money: " + GameManager.Instance.CurrentLevel.Properties.Cash,
             Value.Lives => "Lives: " + GameManager.Instance.CurrentLevel.Properties.Lives,
+            Value.Round => "Round: " + PlayRound.CurrentRound,
             _ => "AN ERROR OCCURRED....",
         };
     }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class AbstractTowerUpgradePaths : MonoBehaviour
@@ -14,10 +16,11 @@ public abstract class AbstractTowerUpgradePaths : MonoBehaviour
     protected int _bottomPathIndex = 0;
     public virtual void BuyNextUpgrade(Upgrade[] path, ref int nextIndex)
     {
+        if (nextIndex >= path.Length) return;
         if (GameManager.Instance.CurrentLevel.Properties.Cash < path[nextIndex].Price) return; //guard clause
         GameManager.Instance.AddMoney(-path[nextIndex].Price);
         _tower.Properties._attackDamage += path[nextIndex].DamageIncrease;
-
+        _tower.AddSpecialUpgrade(path[nextIndex].SpecialUpgrade);
         print(_tower.Properties._attackRadius);
         _tower.Properties._attackRadius += path[nextIndex].RangeIncrease;
         _tower.Properties._radius.transform.localScale = new Vector3(_tower.Properties._attackRadius, _tower.Properties._attackRadius, _tower.Properties._attackRadius);
@@ -36,6 +39,21 @@ public abstract class AbstractTowerUpgradePaths : MonoBehaviour
                 _tower.Properties._damageTypes.Add(dmgType);
         }
         nextIndex++;
+        int[] upgradeInts = _tower.GetUpgrades();
+        string upgradeString = "" + upgradeInts[0] + upgradeInts[1] + upgradeInts[2];
+        SwapSprite(upgradeString,_tower);
         UpgradeGUI.OnCurrentTowerUpdated?.Invoke();
+    }
+    private void SwapSprite(string upgrades, Tower tower)
+    {
+        TowerUpgradeSprites upgradeSprites = tower.GetTowerUpgradeSprites();
+        List<Sprite> spriteArr = TowerUpgradeSprites.GetAllSprites(upgradeSprites);
+        for (int i = 0; i < spriteArr.Count; i++)
+        {
+            if (spriteArr[i].name.Substring(0, 3).Equals(upgrades))
+            {
+                _tower.SpriteRenderer.sprite = spriteArr[i];
+            }
+        }
     }
 }

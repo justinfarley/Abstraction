@@ -15,8 +15,13 @@ MonoBehaviour:
   Name: Sharper Spikes
   Description: Slight Damage Increase
   Price: 225
-  PierceIncrease: 0
+  PierceIncrease: 1
   DamageIncrease: 1
   AttackDelayDecrease: 0
   RangeIncrease: 0
+  ProjectileSpeedIncrease: 0
+  ProjectileTravelDistanceIncrease: 0
   DamageTypesToAdd: 
+  canHitCamo: 0
+  upgradeSprite: {fileID: 0}
+  SpecialUpgrade: 0

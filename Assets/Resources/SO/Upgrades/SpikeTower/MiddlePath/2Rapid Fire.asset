@@ -17,7 +17,10 @@ MonoBehaviour:
   Price: 575
   PierceIncrease: 1
   DamageIncrease: 0
-  AttackDelayDecrease: 0.2
+  AttackDelayDecrease: 0.25
   RangeIncrease: 0
+  ProjectileSpeedIncrease: 0
+  ProjectileTravelDistanceIncrease: 0
   DamageTypesToAdd: 
   canHitCamo: 0
+  upgradeSprite: {fileID: 0}

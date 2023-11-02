@@ -10,12 +10,14 @@ public abstract class Tower : LivingEntity
     [Space(10f)]
     [Header("Tower Fields")]
     public TowerProperties Properties;
+    [SerializeField] private TowerUpgradeSprites _upgradeSprites;
     [Header("Gizmos Options")]
     [SerializeField] private Color _gizmosColor;
     private List<AbstractShapeEnemy> _shapesInRange;
     private AbstractShapeEnemy _nextAttackableShape;
     private Collider2D[] _hits;
     private int[] _upgrades = { 0, 0, 0 };
+    internal List<SpecialUpgrades> _specialUpgrades = new List<SpecialUpgrades>();
     public Color GizmosColor { get => _gizmosColor; set => _gizmosColor = value; }
     public AbstractShapeEnemy NextAttackableShape { get => _nextAttackableShape; set => _nextAttackableShape = value; }
     public override void Awake()
@@ -228,6 +230,11 @@ public abstract class Tower : LivingEntity
     {
         damageableEntity.TakeDamage(this, dmg, damageTypes);
     }
+    public void AddSpecialUpgrade(SpecialUpgrades upgrade)
+    {
+        if(upgrade != SpecialUpgrades.None)
+            _specialUpgrades.Add(upgrade);
+    }
     private List<AbstractShapeEnemy> FindShapesInRange(Collider2D[] hits)
     {
         //TODO: refactor so that the list is ordered based on how far along the PATH they are.
@@ -305,6 +312,10 @@ public abstract class Tower : LivingEntity
     public int GetBottomPathIndex()
     {
         return _upgrades[2];
+    }
+    public TowerUpgradeSprites GetTowerUpgradeSprites()
+    {
+        return _upgradeSprites;
     }
     public virtual void OnDrawGizmos()
     {

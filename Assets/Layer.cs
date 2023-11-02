@@ -72,10 +72,10 @@ public static class Layer
     };
     internal static Dictionary<Layers, float> _layerSpeeds = new Dictionary<Layers, float>()
     {
-        { Layers.White, 0.5f },
-        { Layers.Yellow, 0.75f },
-        { Layers.Blue, 1f },
-        { Layers.Red, 1.5f },
+        { Layers.White, 1f },
+        { Layers.Yellow, 1.25f },
+        { Layers.Blue, 1.5f },
+        { Layers.Red, 1.75f },
         { Layers.Green, 2f },
         { Layers.Orange, 2.5f },
         { Layers.Pink, 3f },

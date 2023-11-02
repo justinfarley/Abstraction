@@ -2,6 +2,8 @@ using PathCreation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using UnityEditor;
 using UnityEngine;
 public abstract class AbstractShapeEnemy : LivingEntity
 {
@@ -29,6 +31,10 @@ public abstract class AbstractShapeEnemy : LivingEntity
             Destroy(gameObject);
         };  
         OnLayerSwap += SwitchLayer;
+        Properties._camoSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Shapes/triangle_camo.png");
+        Properties._normalSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Shapes/triangle_normal.png");
+        Properties._regenSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites//Shapes/triangle_regen.png  ");
+        
     }
     private void Start()
     {
@@ -37,11 +43,22 @@ public abstract class AbstractShapeEnemy : LivingEntity
         MoveSpeed = Layer._layerSpeeds[CurrentLayer];
         Health = Layer._layerHealths[CurrentLayer];
         CurrentState = State.Alive;
+
         UpdateGraphics();
     }
     public virtual void Update()
     {
         Move();
+    }
+    public void ChangedVariant(ShapeEnemyProperties.ShapeVariant variant)
+    {
+        SpriteRenderer.sprite = (variant) switch
+        {
+            ShapeEnemyProperties.ShapeVariant.Normal => Properties._normalSprite,
+            ShapeEnemyProperties.ShapeVariant.Regen => Properties._regenSprite,
+            ShapeEnemyProperties.ShapeVariant.Camo => Properties._camoSprite,
+            _ => null,
+        };
     }
     public override void DealDamage(IDamageable damageableEntity, float dmg)
     {
@@ -168,6 +185,7 @@ public abstract class AbstractShapeEnemy : LivingEntity
         internal Layer.Layers _currentLayer;
         internal float _moveSpeed;
         internal PathCreator _pathCreator;
+        internal Sprite _camoSprite, _regenSprite, _normalSprite;
         [SerializeField] internal GameObject _stripe;
         [SerializeField] internal List<DamageTypes> _typesToBeDamagedBy;
         [SerializeField] internal ShapeVariant _shapeVariant;
