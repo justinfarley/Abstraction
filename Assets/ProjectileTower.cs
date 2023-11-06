@@ -8,7 +8,7 @@ public class ProjectileTower : Tower
     [Header("Projectile Tower Fields")] //TODO: update to be Projectile Tower Fields and make ProjectileTower subclass instead of directly making it
     [SerializeField] protected GameObject _projectile;
     [SerializeField] protected float _projectileOffset;
-    protected Vector2 _projectileSpawnOffset;
+    public Vector2 _projectileSpawnOffset;
     protected Vector2 _projectileSpawnPos;
 
     public override void Awake()

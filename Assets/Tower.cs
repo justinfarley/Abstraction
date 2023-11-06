@@ -16,7 +16,7 @@ public abstract class Tower : LivingEntity
     private List<AbstractShapeEnemy> _shapesInRange;
     private AbstractShapeEnemy _nextAttackableShape;
     private Collider2D[] _hits;
-    private int[] _upgrades = { 0, 0, 0 };
+    protected int[] _upgrades = { 0, 0, 0 };
     internal List<SpecialUpgrades> _specialUpgrades = new List<SpecialUpgrades>();
     public Color GizmosColor { get => _gizmosColor; set => _gizmosColor = value; }
     public AbstractShapeEnemy NextAttackableShape { get => _nextAttackableShape; set => _nextAttackableShape = value; }

@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SpikeTower : ProjectileTower
 {
+    [SerializeField] private GameObject _spikeBall, _ultraSpikeBall;
     public override void Awake()
     {
         base.Awake();
@@ -14,6 +16,57 @@ public class SpikeTower : ProjectileTower
         Name = "SpikeTower";
     }
     public override void Attack()
+    {
+        if (NextAttackableShape == null) return;
+        if (_upgrades[0] == 0 && _upgrades[1] == 0 && _upgrades[2] == 0)
+        {
+            base.Attack();
+            return;
+        }
+        if (_upgrades[0]  > 0)
+        {
+            HandleTopPathAttack();
+        }
+        if (_upgrades[1] > 0)
+        {
+            HandleMiddlePathAttack();
+        }
+        if (_upgrades[2] > 0)
+        {
+            HandleBottomPathAttack();
+        }
+    }
+    private void HandleTopPathAttack()
+    {
+        if (_specialUpgrades.Count <= 0)
+        {
+            base.Attack();
+        }
+        else if (_specialUpgrades.Contains(SpecialUpgrades.SpikeBall))
+        {
+            Attack_SpikeBall();
+        }
+        else if (_specialUpgrades.Contains(SpecialUpgrades.UltraSpikeBall))
+        {
+            Attack_UltraSpikeBall();
+        }
+    }
+    private void HandleMiddlePathAttack()
+    {
+/*        if (_specialUpgrades.Count <= 0)
+        {
+            base.Attack();
+        }
+        else if (_specialUpgrades.Contains(SpecialUpgrades.SpikeBall))
+        {
+            Attack_SpikeBall();
+        }
+        else if (_specialUpgrades.Contains(SpecialUpgrades.UltraSpikeBall))
+        {
+            Attack_UltraSpikeBall();
+        }*/
+    }
+    private void HandleBottomPathAttack()
     {
         if (_specialUpgrades.Count <= 0)
         {
@@ -28,9 +81,23 @@ public class SpikeTower : ProjectileTower
             Attack_TripleShot();
         }
     }
+
+    private void Attack_UltraSpikeBall()
+    {
+
+    }
+
+    private void Attack_SpikeBall()
+    {
+        Projectile projectile = Projectile.Instantiate(_spikeBall, _projectileSpawnPos, Quaternion.identity, this);
+        projectile.name = $"{Properties._damageTypes} Projectile";
+        projectile.Properties._target = NextAttackableShape.transform;
+        projectile.Properties._dir = (NextAttackableShape.transform.position) - transform.position;
+        projectile.Properties._distBeforeDespawn = Properties._projectileTravelDistance;
+    }
+
     private void Attack_QuintupleShot()
     {
-        if (NextAttackableShape == null) return;
         float offset = 0.3f;
         for (int i = 0; i < 5; i++)
         {
@@ -62,7 +129,6 @@ public class SpikeTower : ProjectileTower
 
     private void Attack_TripleShot()
     {
-        if (NextAttackableShape == null) return;
         float offset = 0.6f;
         for (int i = 0; i < 3; i++)
         {

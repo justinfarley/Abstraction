@@ -17,7 +17,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 354dc8cba1c52024890962e81a43c779, type: 3}
   - {fileID: 21300000, guid: fb19f037375e38a4590f8e27da3cd1f6, type: 3}
   middlePathExc: []
-  bottomPathExc: []
+  bottomPathExc:
+  - {fileID: 21300000, guid: 14238ce94115a484e8592b2685628f21, type: 3}
+  - {fileID: 21300000, guid: 9887dc2e12381ef4c8c9a5b7bb761f7c, type: 3}
+  - {fileID: 21300000, guid: aa47eac4d807a6c408244cfa428fc61b, type: 3}
+  - {fileID: 21300000, guid: a62643f8f01e82a4191caa8e0fb10688, type: 3}
+  - {fileID: 21300000, guid: 328434ec2063b054e8cf524c1b008867, type: 3}
   topPathCross: []
   middlePathCross: []
   bottomPathCross: []

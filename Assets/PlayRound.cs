@@ -51,7 +51,7 @@ public class PlayRound : MonoBehaviour
     }
     private void Update()
     {
-        print(_state);
+        //print(_state);
     }
     private void SwapState(State state)
     {

@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6bb8ad582ccab04d901f98211e04759, type: 3}
-  m_Name: 4Quintuple Shot
+  m_Name: 5Ultra Spike Balls
   m_EditorClassIdentifier: 
-  Name: Quintuple Shot
-  Description: 5 SPIKES PER SHOT!!
-  Price: 2575
+  Name: Ultra Spike Balls
+  Description: Spike balls that split into... more spike balls!
+  Price: 2450
   PierceIncrease: 0
-  DamageIncrease: 1
-  AttackDelayDecrease: 0
+  DamageIncrease: 0
+  AttackDelayDecrease: 0.1
   RangeIncrease: 0
   ProjectileSpeedIncrease: 0
   ProjectileTravelDistanceIncrease: 1
   DamageTypesToAdd: 
   canHitCamo: 0
   upgradeSprite: {fileID: 0}
-  SpecialUpgrade: 2
+  SpecialUpgrade: 4

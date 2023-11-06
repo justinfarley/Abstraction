@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6bb8ad582ccab04d901f98211e04759, type: 3}
-  m_Name: 3Triple Shot
+  m_Name: 4Spike Balls
   m_EditorClassIdentifier: 
-  Name: Triple Shot
-  Description: Throw 3 spikes instead of 1!
-  Price: 1725
-  PierceIncrease: -1
-  DamageIncrease: 1
+  Name: Spike Balls
+  Description: Now shoots balls of spikes which split into more spikes!
+  Price: 1750
+  PierceIncrease: 1
+  DamageIncrease: 0
   AttackDelayDecrease: 0
   RangeIncrease: 0
-  ProjectileSpeedIncrease: 1
-  ProjectileTravelDistanceIncrease: 2
+  ProjectileSpeedIncrease: 0
+  ProjectileTravelDistanceIncrease: 0
   DamageTypesToAdd: 
   canHitCamo: 0
   upgradeSprite: {fileID: 0}
-  SpecialUpgrade: 1
+  SpecialUpgrade: 3

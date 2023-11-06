@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6bb8ad582ccab04d901f98211e04759, type: 3}
-  m_Name: 3Better Projectiles
+  m_Name: 4Triple Shot
   m_EditorClassIdentifier: 
-  Name: Better Projectiles
-  Description: Enhanced Spikes!
-  Price: 750
-  PierceIncrease: 0
+  Name: Triple Shot
+  Description: Throw 3 spikes instead of 1!
+  Price: 1725
+  PierceIncrease: -1
   DamageIncrease: 1
   AttackDelayDecrease: 0
-  RangeIncrease: 0.1
+  RangeIncrease: 0
   ProjectileSpeedIncrease: 1
-  ProjectileTravelDistanceIncrease: 10
+  ProjectileTravelDistanceIncrease: 2
   DamageTypesToAdd: 
-  canHitCamo: 1
-  upgradeSprite: {fileID: 21300000, guid: e36d1a38d7aa309409e80bf66a089330, type: 3}
-  SpecialUpgrade: 0
+  canHitCamo: 0
+  upgradeSprite: {fileID: 0}
+  SpecialUpgrade: 1

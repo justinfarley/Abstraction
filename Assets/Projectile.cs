@@ -8,10 +8,13 @@ public class Projectile : Entity, IDamageable
     [Header("Projectile Fields")]
     public ProjectileProperties Properties;
     private Tower.TowerProperties _towerProperties;
-    private int _pierce;
-    private float _speed;
+    protected int _pierce;
+    protected float _speed;
+    private Vector2 spawnPos;
     public float DamageGiven { get; set; }
     public float DamageTaken { get; set; }
+
+    public int Pierce { get => _pierce; set => _pierce = value; }
     public Transform Target { get => Properties._target; set => Properties._target = value; }
     /// <summary>
     /// Damages an entity
@@ -28,7 +31,7 @@ public class Projectile : Entity, IDamageable
         //since all projectiles should be instantiated as a child of the thing shooting them
         damageableEntity.TakeDamage(Properties._sourceParent, dmg);
     }
-    public void DealDamage(AbstractShapeEnemy damageableEntity, List<DamageTypes> damageTypes)
+    public virtual void DealDamage(AbstractShapeEnemy damageableEntity, List<DamageTypes> damageTypes)
     {
         damageableEntity.TakeDamage(Properties._sourceParent, _towerProperties._attackDamage, damageTypes);
         _pierce--;
@@ -38,7 +41,10 @@ public class Projectile : Entity, IDamageable
     {
         GameObject go = Instantiate(prefab, position, rotation);
         Projectile p = go.GetComponent<Projectile>();
+        print(p);
         p.Properties._sourceParent = sourceParent;
+        p._speed = sourceParent.Properties._projectileSpeed;
+        p._pierce = sourceParent.Properties._projectilePierce;
         return p;
     }
     public void TakeDamage(IDamageable damageDealer, float dmg)
@@ -54,9 +60,8 @@ public class Projectile : Entity, IDamageable
     }
     private void Start()
     {
+        spawnPos = transform.position;
         _towerProperties = Properties._sourceParent.Properties;
-        _speed = _towerProperties._projectileSpeed;
-        _pierce = _towerProperties._projectilePierce;
         if (Properties._sourceParent.NextAttackableShape != null)
         {
             transform.right = Properties._sourceParent.NextAttackableShape.transform.position - transform.position;
@@ -66,12 +71,12 @@ public class Projectile : Entity, IDamageable
     {
         if (Properties._dir == null) return;
         EntityRigidbody.velocity = _speed * Properties._dir;
-        if(Vector2.Distance(Properties._sourceParent.transform.position, transform.position) >= Properties._distBeforeDespawn)
+        if(Vector2.Distance(spawnPos, transform.position) >= Properties._distBeforeDespawn)
         {
             Destroy(gameObject);
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<AbstractShapeEnemy>())
         {
