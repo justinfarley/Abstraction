@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2044507397989424815
+--- !u!1 &314314445714691077
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5705922482973952535}
-  - component: {fileID: 4163963942429416084}
-  - component: {fileID: 7891677310301004390}
-  - component: {fileID: -3072453037385696379}
-  - component: {fileID: 6132188123416829262}
+  - component: {fileID: 314314445714691083}
+  - component: {fileID: 314314445714691076}
+  - component: {fileID: 6717478826517176734}
+  - component: {fileID: 1969607397244201050}
+  - component: {fileID: -3003074363831049577}
   m_Layer: 0
-  m_Name: Spike Ball
+  m_Name: Ultra Spike Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5705922482973952535
+--- !u!4 &314314445714691083
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044507397989424815}
+  m_GameObject: {fileID: 314314445714691077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.605246, y: -3.279074, z: 0}
+  m_LocalPosition: {x: -5.1649723, y: -0.24039678, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4163963942429416084
+--- !u!212 &314314445714691076
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044507397989424815}
+  m_GameObject: {fileID: 314314445714691077}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fa288b3c489670445ad114a296316574, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,40 +87,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7891677310301004390
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044507397989424815}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0051748753, y: 0.006900072}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.87235117, y: 0.8620014}
-  m_EdgeRadius: 0
---- !u!50 &-3072453037385696379
+--- !u!50 &6717478826517176734
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044507397989424815}
+  m_GameObject: {fileID: 314314445714691077}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -134,27 +108,53 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6132188123416829262
+--- !u!61 &1969607397244201050
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314314445714691077}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &-3003074363831049577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044507397989424815}
+  m_GameObject: {fileID: 314314445714691077}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1e5dbfc04b448e4ebe3936145543d6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3657f8d7653fcfd47bf4ccc81576d70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   entityProperties:
-    _name: Spike Ball
-    _entityRigidbody: {fileID: -3072453037385696379}
-    _entityCollider: {fileID: 7891677310301004390}
-    _sprite: {fileID: 21300000, guid: fa288b3c489670445ad114a296316574, type: 3}
-    _spriteRenderer: {fileID: 4163963942429416084}
+    _name: Ultra Spike Ball
+    _entityRigidbody: {fileID: 6717478826517176734}
+    _entityCollider: {fileID: 1969607397244201050}
+    _sprite: {fileID: 0}
+    _spriteRenderer: {fileID: 314314445714691076}
     _type: 5
     _state: 3
     _animator: {fileID: 0}
   Properties:
     _target: {fileID: 0}
-  spawnedPrefab: {fileID: 9016540880761141108, guid: d0b71fb7468779d4c9b5f5e6128f4465, type: 3}
+  spawnedPrefab: {fileID: 2044507397989424815, guid: f69c84e63fb3f6f4599fb2fb6ca17782, type: 3}

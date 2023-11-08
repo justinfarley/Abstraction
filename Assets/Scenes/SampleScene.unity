@@ -1814,7 +1814,7 @@ MonoBehaviour:
   _projectileOffset: 0.75
   _projectileSpawnOffset: {x: 0.75, y: 0.75}
   _spikeBall: {fileID: 2044507397989424815, guid: f69c84e63fb3f6f4599fb2fb6ca17782, type: 3}
-  _ultraSpikeBall: {fileID: 0}
+  _ultraSpikeBall: {fileID: 314314445714691077, guid: e90fd26a00115fc4198322b7cdcce4cb, type: 3}
 --- !u!1 &504668898
 GameObject:
   m_ObjectHideFlags: 0

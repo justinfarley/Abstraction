@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         //TODO: REMOVE THIS OBVIOUSLY
         if(Input.GetKeyDown(KeyCode.Y))
         {
-            AddMoney(500);
+            AddMoney(5000);
         }
     }
     public void AddMoney(int amount)

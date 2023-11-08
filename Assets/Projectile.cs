@@ -14,6 +14,7 @@ public class Projectile : Entity, IDamageable
     public float DamageGiven { get; set; }
     public float DamageTaken { get; set; }
 
+    public bool isDirect = true;
     public int Pierce { get => _pierce; set => _pierce = value; }
     public Transform Target { get => Properties._target; set => Properties._target = value; }
     /// <summary>
@@ -41,9 +42,12 @@ public class Projectile : Entity, IDamageable
     {
         GameObject go = Instantiate(prefab, position, rotation);
         Projectile p = go.GetComponent<Projectile>();
-        print(p);
         p.Properties._sourceParent = sourceParent;
         p._speed = sourceParent.Properties._projectileSpeed;
+        p.name = $"Projectile";
+        p.Properties._target = sourceParent.NextAttackableShape != null ? sourceParent.NextAttackableShape.transform : null;
+        p.Properties._dir = sourceParent.NextAttackableShape != null ? ((sourceParent.NextAttackableShape.transform.position) - sourceParent.transform.position) : Vector2.zero;
+        p.Properties._distBeforeDespawn = sourceParent.Properties._projectileTravelDistance;
         p._pierce = sourceParent.Properties._projectilePierce;
         return p;
     }
@@ -62,7 +66,7 @@ public class Projectile : Entity, IDamageable
     {
         spawnPos = transform.position;
         _towerProperties = Properties._sourceParent.Properties;
-        if (Properties._sourceParent.NextAttackableShape != null)
+        if (Properties._sourceParent.NextAttackableShape != null && isDirect)
         {
             transform.right = Properties._sourceParent.NextAttackableShape.transform.position - transform.position;
         }

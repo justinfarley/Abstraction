@@ -42,13 +42,13 @@ public class SpikeTower : ProjectileTower
         {
             base.Attack();
         }
-        else if (_specialUpgrades.Contains(SpecialUpgrades.SpikeBall))
-        {
-            Attack_SpikeBall();
-        }
         else if (_specialUpgrades.Contains(SpecialUpgrades.UltraSpikeBall))
         {
             Attack_UltraSpikeBall();
+        }
+        else if (_specialUpgrades.Contains(SpecialUpgrades.SpikeBall))
+        {
+            Attack_SpikeBall();
         }
     }
     private void HandleMiddlePathAttack()
@@ -84,16 +84,12 @@ public class SpikeTower : ProjectileTower
 
     private void Attack_UltraSpikeBall()
     {
-
+        Projectile.Instantiate(_ultraSpikeBall, _projectileSpawnPos, Quaternion.identity, this);
     }
 
     private void Attack_SpikeBall()
     {
-        Projectile projectile = Projectile.Instantiate(_spikeBall, _projectileSpawnPos, Quaternion.identity, this);
-        projectile.name = $"{Properties._damageTypes} Projectile";
-        projectile.Properties._target = NextAttackableShape.transform;
-        projectile.Properties._dir = (NextAttackableShape.transform.position) - transform.position;
-        projectile.Properties._distBeforeDespawn = Properties._projectileTravelDistance;
+        Projectile.Instantiate(_spikeBall, _projectileSpawnPos, Quaternion.identity, this);
     }
 
     private void Attack_QuintupleShot()
@@ -102,9 +98,6 @@ public class SpikeTower : ProjectileTower
         for (int i = 0; i < 5; i++)
         {
             Projectile projectile = Projectile.Instantiate(_projectile, _projectileSpawnPos, Quaternion.identity, this);
-            projectile.name = $"{Properties._damageTypes} Projectile";
-
-            projectile.Properties._target = NextAttackableShape.transform;
             Vector3 addVector = Vector3.zero;
             if (i == 0)
             {
@@ -123,7 +116,6 @@ public class SpikeTower : ProjectileTower
                 addVector = new Vector3(offset * 2, offset * 2, 0);
             }
             projectile.Properties._dir = (NextAttackableShape.transform.position + addVector) - transform.position;
-            projectile.Properties._distBeforeDespawn = Properties._projectileTravelDistance;
         }
     }
 
@@ -133,9 +125,6 @@ public class SpikeTower : ProjectileTower
         for (int i = 0; i < 3; i++)
         {
             Projectile projectile = Projectile.Instantiate(_projectile, _projectileSpawnPos, Quaternion.identity, this);
-            projectile.name = $"{Properties._damageTypes} Projectile";
-
-            projectile.Properties._target = NextAttackableShape.transform;
             Vector3 addVector = Vector3.zero;
             if (i == 0)
             {
@@ -146,7 +135,6 @@ public class SpikeTower : ProjectileTower
                 addVector = new Vector3(-offset, -offset, 0);
             }
             projectile.Properties._dir = (NextAttackableShape.transform.position + addVector) - transform.position;
-            projectile.Properties._distBeforeDespawn = Properties._projectileTravelDistance;
         }
     }
 }
