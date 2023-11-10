@@ -9,7 +9,7 @@ public static class Layer
         { Layers.Blue, 1 },
         { Layers.Red, 1 },
         { Layers.Green, 1 },
-        { Layers.Orange, 1 },
+        { Layers.Orange, 2 },
         { Layers.Pink, 1 },
         { Layers.Brown, 2 },
         { Layers.Purple, 1 },

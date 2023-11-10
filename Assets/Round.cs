@@ -71,10 +71,12 @@ public class Round
     {
         return new Wave(numShapes, timeBetweenSpawns, layer);
     }
+    //TODO: MAYBE adjust so the enemies can have multiple shape variants if time
     public static Wave MakeWave(int numShapes, float timeBetweenSpawns, Layer.Layers layer, AbstractShapeEnemy.ShapeEnemyProperties.ShapeVariant variant)
     {
         return new Wave(numShapes, timeBetweenSpawns, layer, variant);
     }
+    
     /// <summary>
     /// Wave of shapes
     /// E.G. 5 Yellow shapes with 0.25 time between each one getting instantiated would look like this:<para></para>

@@ -301,21 +301,17 @@ public abstract class Tower : LivingEntity
     {
         return _upgrades;
     }
-    public int GetTopPathIndex()
-    {
-        return _upgrades[0];
-    }
-    public int GetMiddlePathIndex()
-    {
-        return _upgrades[1];
-    }
-    public int GetBottomPathIndex()
-    {
-        return _upgrades[2];
-    }
     public TowerUpgradeSprites GetTowerUpgradeSprites()
     {
         return _upgradeSprites;
+    }
+    public void TryDecreaseAttackSpeed(float amount)
+    {
+        float newAm = Properties._attackSpeed - amount;
+        if (newAm < GameUtils.GLOBAL_ATTACK_SPEED_CAP)
+            Properties._attackSpeed = GameUtils.GLOBAL_ATTACK_SPEED_CAP;
+        else
+            Properties._attackSpeed -= amount;
     }
     public virtual void OnDrawGizmos()
     {
@@ -323,6 +319,13 @@ public abstract class Tower : LivingEntity
         {
             Gizmos.color = _gizmosColor;
             Gizmos.DrawWireSphere(transform.position, Properties._attackRadius);
+        }
+    }
+    public void AddTowerDebuffsToShape(AbstractShapeEnemy enemy)
+    {
+        foreach(Debuffs d in Properties._debuffsToGive)
+        {
+            enemy.OnDebuffAdded?.Invoke(d, this);
         }
     }
 
@@ -337,6 +340,7 @@ public abstract class Tower : LivingEntity
         [SerializeField] internal bool _isSelected;
         [SerializeField] internal Targeting _attackType;
         [SerializeField] internal List<DamageTypes> _damageTypes;
+        [SerializeField] internal List<Debuffs> _debuffsToGive;
         [SerializeField] internal int _projectilePierce;
         [SerializeField] internal float _projectileSpeed;
         [SerializeField] internal float _projectileTravelDistance;

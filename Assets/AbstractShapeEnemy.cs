@@ -2,6 +2,7 @@ using PathCreation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -21,6 +22,8 @@ public abstract class AbstractShapeEnemy : LivingEntity
 
     private float _progress = 0f;
     public Action OnLayerSwap;
+    public delegate void DebuffAdded(Debuffs debuff, Tower sourceParent);
+    public DebuffAdded OnDebuffAdded;
     public override void Awake()
     {
         base.Awake();
@@ -31,9 +34,10 @@ public abstract class AbstractShapeEnemy : LivingEntity
             Destroy(gameObject);
         };  
         OnLayerSwap += SwitchLayer;
+        OnDebuffAdded += AddDebuff;
         Properties._camoSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Shapes/triangle_camo.png");
         Properties._normalSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Shapes/triangle_normal.png");
-        Properties._regenSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites//Shapes/triangle_regen.png  ");
+        Properties._regenSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Shapes/triangle_regen.png");
         
     }
     private void Start()
@@ -86,10 +90,10 @@ public abstract class AbstractShapeEnemy : LivingEntity
     {
         if (dmg < 0) return;
         if (CurrentState == State.Invulnerable) return;
+        dmg *= Properties._localDamageTakenMultiplier;
         if (CurrentLayer == Layer.Layers.White)
         {
             //kill shape
-            print("killed");
             if (damageDealer != null)
                 damageDealer.DamageGiven += 1;
             DamageTaken += 1;
@@ -150,10 +154,12 @@ public abstract class AbstractShapeEnemy : LivingEntity
         if(numSplits <= 0 || currentLayer == Layer.Layers.White) return;
         for (int i = 0; i < numSplits; i++)
         {
-            AbstractShapeEnemy newShape = Instantiate(_round.PrefabPairs[(int)currentLayer - 2]._prefab, Vector3.zero, Quaternion.identity).GetComponent<AbstractShapeEnemy>();
+            AbstractShapeEnemy newShape = Instantiate(_round.PrefabPairs[(int)currentLayer - 2]._prefab, transform.position, Quaternion.identity).GetComponent<AbstractShapeEnemy>();
             float buffer = 0.5f;
             newShape.Progress = Progress - (buffer * (i+1));
-            newShape.name = "Split";
+            newShape.name = "Split " + currentLayer;
+            newShape.Properties._shapeVariant = Properties._shapeVariant;
+            newShape.ChangedVariant(Properties._shapeVariant);
         }   
         
     }
@@ -178,16 +184,67 @@ public abstract class AbstractShapeEnemy : LivingEntity
     {
         return Properties._shapeVariant == ShapeEnemyProperties.ShapeVariant.Camo;
     }
+    public bool IsRegen()
+    {
+        return Properties._shapeVariant == ShapeEnemyProperties.ShapeVariant.Regen;
+    }
+    public void AddDebuff(Debuffs debuff, Tower sourceParent)
+    {
+        AddDebuffComponent(4f, debuff, sourceParent);
+    }
+    public void AddDebuffComponent(float debuffTime, Debuffs d, Tower sourceParent)
+    {
+        //if debuff is fire add fire component etc.
+        //TODO: add other effects of the different debuffs
+        if (Properties._debuffs.Contains(d)) return;
+        switch (d)
+        {
+            case Debuffs.Fire:
+                Fire fire = gameObject.AddComponent<Fire>();
+                fire.SetTimeBetweenDamage(0.5f);
+                //fire.SetLifeTime(debuffTime);
+                fire.SetSourceParent(sourceParent);
+                break;
+            case Debuffs.Stunned:
+                Stunned stunned = gameObject.AddComponent<Stunned>();
+                //fire.SetLifeTime(debuffTime);
+                stunned.SetSourceParent(sourceParent);
+                break;
+            case Debuffs.Slowed:
+                Slowed slowed = gameObject.AddComponent<Slowed>();
+                slowed.SetSourceParent(sourceParent);
+                break;
+            case Debuffs.Confused:
+                Confused confused = gameObject.AddComponent<Confused>();
+                confused.SetSourceParent(sourceParent);
+                break;
+            case Debuffs.Worn:
+                Worn worn;
+                if (sourceParent.GetUpgrades()[1] == 3)
+                {
+                    worn = gameObject.AddComponent<Worn>();
+                    worn.SetSourceParent(sourceParent);
+                    worn.SetDamageMultiplier(1.15f);
+                    break;
+                }
+                worn = gameObject.AddComponent<Worn>();
+                worn.SetDamageMultiplier(1.67f);
+                worn.SetSourceParent(sourceParent);
+                break;
+        }
+        Properties._debuffs.Add(d);
 
+    }
     [Serializable]
     public class ShapeEnemyProperties
     {
         internal Layer.Layers _currentLayer;
-        internal float _moveSpeed;
+        internal float _moveSpeed, _localDamageTakenMultiplier = 1f;
         internal PathCreator _pathCreator;
         internal Sprite _camoSprite, _regenSprite, _normalSprite;
         [SerializeField] internal GameObject _stripe;
         [SerializeField] internal List<DamageTypes> _typesToBeDamagedBy;
+        [SerializeField] internal List<Debuffs> _debuffs;
         [SerializeField] internal ShapeVariant _shapeVariant;
         public enum ShapeVariant
         {

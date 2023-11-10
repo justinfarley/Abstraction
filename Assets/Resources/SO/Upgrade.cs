@@ -15,6 +15,7 @@ public class Upgrade : ScriptableObject
     public float ProjectileSpeedIncrease;
     public float ProjectileTravelDistanceIncrease;
     public List<DamageTypes> DamageTypesToAdd;
+    public List<Debuffs> DebuffsToAdd;
     public bool canHitCamo = false;
     public Sprite upgradeSprite;
     public SpecialUpgrades SpecialUpgrade = SpecialUpgrades.None;

@@ -53,18 +53,7 @@ public class SpikeTower : ProjectileTower
     }
     private void HandleMiddlePathAttack()
     {
-/*        if (_specialUpgrades.Count <= 0)
-        {
-            base.Attack();
-        }
-        else if (_specialUpgrades.Contains(SpecialUpgrades.SpikeBall))
-        {
-            Attack_SpikeBall();
-        }
-        else if (_specialUpgrades.Contains(SpecialUpgrades.UltraSpikeBall))
-        {
-            Attack_UltraSpikeBall();
-        }*/
+        base.Attack();
     }
     private void HandleBottomPathAttack()
     {

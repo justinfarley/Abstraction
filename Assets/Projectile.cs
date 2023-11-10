@@ -86,6 +86,7 @@ public class Projectile : Entity, IDamageable
         {
             AbstractShapeEnemy enemy = collision.gameObject.GetComponent<AbstractShapeEnemy>();
             print($"Dealing damage to {enemy.name}");
+            Properties._sourceParent.AddTowerDebuffsToShape(enemy);
             if(_pierce >= 1)
                 DealDamage(enemy, _towerProperties._damageTypes);
         }

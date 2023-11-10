@@ -19,7 +19,6 @@ public abstract class LivingEntity : Entity, IDamageable
 
     public Action OnDeath;
 
-
     public virtual void Awake()
     {
         Init_LivingEntity();

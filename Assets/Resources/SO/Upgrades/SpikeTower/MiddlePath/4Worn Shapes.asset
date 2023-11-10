@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6bb8ad582ccab04d901f98211e04759, type: 3}
-  m_Name: 5Ultra Spike Balls
+  m_Name: 4Worn Shapes
   m_EditorClassIdentifier: 
-  Name: Ultra Spike Balls
-  Description: Spike balls that split into... more spike balls!
-  Price: 2450
-  PierceIncrease: 0
-  DamageIncrease: 5
-  AttackDelayDecrease: 0.25
+  Name: Worn Shapes!
+  Description: Shapes that are hit will take increased damage from all towers!
+  Price: 5100
+  PierceIncrease: 1
+  DamageIncrease: 0
+  AttackDelayDecrease: 0
   RangeIncrease: 0
   ProjectileSpeedIncrease: 0
-  ProjectileTravelDistanceIncrease: 1
+  ProjectileTravelDistanceIncrease: 0
   DamageTypesToAdd: 
+  DebuffsToAdd: 04000000
   canHitCamo: 0
   upgradeSprite: {fileID: 0}
-  SpecialUpgrade: 4
+  SpecialUpgrade: 0

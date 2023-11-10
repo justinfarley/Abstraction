@@ -20,13 +20,17 @@ public abstract class AbstractTowerUpgradePaths : MonoBehaviour
         if (GameManager.Instance.CurrentLevel.Properties.Cash < path[nextIndex].Price) return; //guard clause
         GameManager.Instance.AddMoney(-path[nextIndex].Price);
         _tower.Properties._attackDamage += path[nextIndex].DamageIncrease;
+
         _tower.AddSpecialUpgrade(path[nextIndex].SpecialUpgrade);
         print(_tower.Properties._attackRadius);
         _tower.Properties._attackRadius += path[nextIndex].RangeIncrease;
         _tower.Properties._radius.transform.localScale = new Vector3(_tower.Properties._attackRadius, _tower.Properties._attackRadius, _tower.Properties._attackRadius);
         print(_tower.Properties._attackRadius);
 
-        _tower.Properties._attackSpeed -= path[nextIndex].AttackDelayDecrease;
+        _tower.TryDecreaseAttackSpeed(path[nextIndex].AttackDelayDecrease);
+        //_tower.Properties._attackSpeed -= path[nextIndex].AttackDelayDecrease;
+
+        _tower.Properties._projectilePierce += path[nextIndex].PierceIncrease;
         _tower.Properties._projectileSpeed += path[nextIndex].ProjectileSpeedIncrease;
         _tower.Properties._projectileTravelDistance += path[nextIndex].ProjectileTravelDistanceIncrease;
         if (!_tower.Properties._canHitCamo) //only change if you couldnt before the upgrade
@@ -37,6 +41,10 @@ public abstract class AbstractTowerUpgradePaths : MonoBehaviour
         {
             if(!_tower.Properties._damageTypes.Contains(dmgType))
                 _tower.Properties._damageTypes.Add(dmgType);
+        }
+        foreach (var v in path[nextIndex].DebuffsToAdd)
+        {
+            _tower.Properties._debuffsToGive.Add(v);
         }
         nextIndex++;
         int[] upgradeInts = _tower.GetUpgrades();

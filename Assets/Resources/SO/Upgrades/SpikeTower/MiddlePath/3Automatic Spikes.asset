@@ -22,6 +22,7 @@ MonoBehaviour:
   ProjectileSpeedIncrease: 1
   ProjectileTravelDistanceIncrease: 2
   DamageTypesToAdd: 
+  DebuffsToAdd: 
   canHitCamo: 1
   upgradeSprite: {fileID: 0}
   SpecialUpgrade: 0
