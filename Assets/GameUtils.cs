@@ -11,6 +11,8 @@ public static class GameUtils
 
     public static float GLOBAL_SLOWED_DEBUFF_SPEED_REDUCTION_MULTIPLIER = 0.5f;
 
+    public static float GLOBAL_REGROW_RATE_IN_SECONDS = 1f;
+
 
     //These are all attributes of the towers ... e.g. the upgrade cost of towers, the atk speed cap, etc.
     public static float GLOBAL_UPGRADE_COST_MULTIPLIER = 1f;

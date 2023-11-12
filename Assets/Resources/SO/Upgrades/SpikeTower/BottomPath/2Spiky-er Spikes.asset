@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Spiky-er Spikes
   Description: Increased pierce, damage, and higher projectile speed.
-  Price: 0
+  Price: 550
   PierceIncrease: 1
   DamageIncrease: 1
   AttackDelayDecrease: 0
@@ -22,6 +22,7 @@ MonoBehaviour:
   ProjectileSpeedIncrease: 2
   ProjectileTravelDistanceIncrease: 1
   DamageTypesToAdd: 
+  DebuffsToAdd: 
   canHitCamo: 0
   upgradeSprite: {fileID: 0}
   SpecialUpgrade: 0

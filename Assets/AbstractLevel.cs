@@ -276,5 +276,11 @@ public abstract class AbstractLevel : MonoBehaviour
                 Round.MakeWave(100, 0.375f, Layer.Layers.Orange, REGEN),
             },Round.WaveSpawnType.Seperate
             ),
+        //Round 22: TEST ROUND
+        new Round(
+        new List<Round.Wave>(){
+                Round.MakeWave(1, 1f, Layer.Layers.Blue, REGEN),
+            },Round.WaveSpawnType.Seperate
+            ),
     };
 }

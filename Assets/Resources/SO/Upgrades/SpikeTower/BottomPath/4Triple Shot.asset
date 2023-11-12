@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Triple Shot
   Description: Throw 3 spikes instead of 1!
-  Price: 1725
+  Price: 3725
   PierceIncrease: -1
   DamageIncrease: 1
   AttackDelayDecrease: 0
@@ -22,6 +22,7 @@ MonoBehaviour:
   ProjectileSpeedIncrease: 1
   ProjectileTravelDistanceIncrease: 2
   DamageTypesToAdd: 
+  DebuffsToAdd: 
   canHitCamo: 0
   upgradeSprite: {fileID: 0}
   SpecialUpgrade: 1

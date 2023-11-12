@@ -1,9 +1,6 @@
 using PathCreation;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using UnityEditor;
 using UnityEngine;
 public abstract class AbstractShapeEnemy : LivingEntity
@@ -22,6 +19,7 @@ public abstract class AbstractShapeEnemy : LivingEntity
 
     private float _progress = 0f;
     public Action OnLayerSwap;
+    private float _timeNotDamaged = 0f;
     public delegate void DebuffAdded(Debuffs debuff, Tower sourceParent);
     public DebuffAdded OnDebuffAdded;
     public override void Awake()
@@ -32,7 +30,7 @@ public abstract class AbstractShapeEnemy : LivingEntity
         {
             GameManager.Instance.CurrentShapesOnScreen.Remove(this);
             Destroy(gameObject);
-        };  
+        };
         OnLayerSwap += SwitchLayer;
         OnDebuffAdded += AddDebuff;
         Properties._camoSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Shapes/triangle_camo.png");
@@ -71,6 +69,7 @@ public abstract class AbstractShapeEnemy : LivingEntity
     private void Move()
     {
         float dst;
+        _timeNotDamaged += Time.deltaTime;
         _progress += MoveSpeed * GameUtils.GLOBAL_SPEED_MULTIPLIER * Time.deltaTime;
         dst = _progress;
         transform.position = Properties._pathCreator.path.GetPointAtDistance(_progress, _endInstruction);
@@ -88,9 +87,10 @@ public abstract class AbstractShapeEnemy : LivingEntity
     //TODO: implement pierce -> in Projectile code, pierce of 3 = projectile can hit 3 things before dissapearing
     public override void TakeDamage(IDamageable damageDealer, float dmg)
     {
-        if (dmg < 0) return;
+        if (dmg <= 0) return;
         if (CurrentState == State.Invulnerable) return;
         dmg *= Properties._localDamageTakenMultiplier;
+        _timeNotDamaged = 0;
         if (CurrentLayer == Layer.Layers.White)
         {
             //kill shape
@@ -146,6 +146,13 @@ public abstract class AbstractShapeEnemy : LivingEntity
         Health = Layer._layerHealths[CurrentLayer];
         UpdateGraphics();
     }
+    public void RegenLayer()
+    {
+        CurrentLayer++;
+        MoveSpeed = Layer._layerSpeeds[CurrentLayer];
+        Health = Layer._layerHealths[CurrentLayer];
+        UpdateGraphics();
+    }
 
     private void CheckSpawnExtraShapes(Layer.Layers currentLayer)
     {
@@ -158,6 +165,13 @@ public abstract class AbstractShapeEnemy : LivingEntity
             float buffer = 0.5f;
             newShape.Progress = Progress - (buffer * (i+1));
             newShape.name = "Split " + currentLayer;
+            if(Properties._shapeVariant == ShapeEnemyProperties.ShapeVariant.Regen)
+            {
+                print($"base layer {GetComponent<Regen>().GetBaseLayer()}");
+                newShape.gameObject.AddComponent<Regen>().SetBaseLayer(GetComponent<Regen>().GetBaseLayer());
+                newShape.GetComponent<Regen>().StartRegen();
+                newShape.name += " (Regen)";
+            }
             newShape.Properties._shapeVariant = Properties._shapeVariant;
             newShape.ChangedVariant(Properties._shapeVariant);
         }   
@@ -166,6 +180,7 @@ public abstract class AbstractShapeEnemy : LivingEntity
 
     private void UpdateGraphics()
     {
+        //TODO: update for diamonds
         //update graphics
         if ((int)CurrentLayer <= 11)
         { //all non-striped shapes
@@ -174,7 +189,6 @@ public abstract class AbstractShapeEnemy : LivingEntity
         }
         else
         {
-            print(Properties.colors[(int)(CurrentLayer - 12)]);
             SpriteRenderer.color = Properties.colors[(int)(CurrentLayer - 12)];
             //enable stripe on it
             Properties._stripe.SetActive(true);
@@ -187,6 +201,10 @@ public abstract class AbstractShapeEnemy : LivingEntity
     public bool IsRegen()
     {
         return Properties._shapeVariant == ShapeEnemyProperties.ShapeVariant.Regen;
+    }
+    public float GetTimeNotDamaged()
+    {
+        return _timeNotDamaged;
     }
     public void AddDebuff(Debuffs debuff, Tower sourceParent)
     {

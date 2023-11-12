@@ -48,8 +48,8 @@ public abstract class Entity : MonoBehaviour
         [SerializeField] internal Collider2D _entityCollider;
         [SerializeField] internal Sprite _sprite;
         [SerializeField] internal SpriteRenderer _spriteRenderer;
-        [SerializeField] internal Type _type;
-        [SerializeField] internal State _state;
+        internal Type _type;
+        internal State _state;
         [SerializeField] internal Animator _animator;
     }
 

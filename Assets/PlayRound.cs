@@ -260,6 +260,12 @@ public class PlayRound : MonoBehaviour
     {
         AbstractShapeEnemy newShape = Instantiate(prefab).GetComponent<AbstractShapeEnemy>();
         newShape.gameObject.name = layer.ToString() + " triangle " + namingNumber;
+        if (variant == AbstractShapeEnemy.ShapeEnemyProperties.ShapeVariant.Regen)
+        {
+            newShape.gameObject.name += " (Regen)";
+            newShape.gameObject.AddComponent<Regen>();
+        }
+        if (variant == AbstractShapeEnemy.ShapeEnemyProperties.ShapeVariant.Camo) newShape.gameObject.name += " (Camo)";
         newShape.Properties._shapeVariant = variant;
         newShape.ChangedVariant(variant);
         GameManager.Instance.CurrentShapesOnScreen.Add(newShape);

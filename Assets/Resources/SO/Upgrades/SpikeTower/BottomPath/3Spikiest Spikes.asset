@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: rename later
   Description: rename
-  Price: 550
+  Price: 890
   PierceIncrease: 2
   DamageIncrease: 1
   AttackDelayDecrease: 0
@@ -22,6 +22,7 @@ MonoBehaviour:
   ProjectileSpeedIncrease: 0
   ProjectileTravelDistanceIncrease: 0
   DamageTypesToAdd: 
+  DebuffsToAdd: 
   canHitCamo: 0
   upgradeSprite: {fileID: 0}
   SpecialUpgrade: 0
