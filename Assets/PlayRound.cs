@@ -25,6 +25,7 @@ public class PlayRound : MonoBehaviour
     private State _state;
     private bool _wasFast = false;
     public static Action OnRoundStarted;
+    private Round[] rounds = JsonHelper.GetRoundsData()._rounds;
     public static int CurrentRound { get; private set; } = 0;
     public static event Action OnStateChanged;
     [Serializable]
@@ -119,7 +120,7 @@ public class PlayRound : MonoBehaviour
     {
         for (int i = _startRound - 1; i < _numRounds; i++)
         {
-            StartRound(AbstractLevel._rounds[i]);
+            StartRound(rounds[i]);
             print("waiting for canstartround");
             yield return new WaitUntil(GameManager.Instance.CanStartNextRound);
             print("setting stuff active again");
@@ -160,7 +161,7 @@ public class PlayRound : MonoBehaviour
         switch (round.SpawnType)
         {
             case Round.WaveSpawnType.Seperate:
-                StartCoroutine(StartRound_cr(round, round.GetWavesInRound().Count));
+                StartCoroutine(StartRound_cr(round, round.GetWavesInRound().Length));
                 break;
             case Round.WaveSpawnType.Together:
                 SpawnAllWaves(round);
@@ -177,12 +178,12 @@ public class PlayRound : MonoBehaviour
     }
     private IEnumerator SpawnAllWaves_cr(Round round)
     {
-        for (int i = 0; i < round.GetWavesInRound().Count - 1; i++)
+        for (int i = 0; i < round.GetWavesInRound().Length - 1; i++)
         {
             StartCoroutine(SpawnWave_cr(round[i]));
         }
         //TODO: make donespawning trigger after all the shapes are spawned
-        yield return StartCoroutine(SpawnWave_cr(round[round.GetWavesInRound().Count - 1]));
+        yield return StartCoroutine(SpawnWave_cr(round[round.GetWavesInRound().Length - 1]));
         round.DoneSpawning = true;
     }
     private IEnumerator StartRound_cr(Round round, int numWaves)
@@ -213,7 +214,7 @@ public class PlayRound : MonoBehaviour
                 yield return new WaitForSeconds(round[i].timeBetweenSpawns);
             }
         }
-        if (numWaves >= round.GetWavesInRound().Count)
+        if (numWaves >= round.GetWavesInRound().Length)
         {
             print("done spawning everything");
             round.DoneSpawning = true;
@@ -221,7 +222,7 @@ public class PlayRound : MonoBehaviour
         }
         else
         {
-            for (int i = numWaves; i < round.GetWavesInRound().Count; i++)
+            for (int i = numWaves; i < round.GetWavesInRound().Length; i++)
             {
                 StartCoroutine(SpawnWave_cr(round[i]));
             }

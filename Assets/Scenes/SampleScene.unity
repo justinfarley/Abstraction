@@ -1792,15 +1792,13 @@ MonoBehaviour:
     _entityCollider: {fileID: 0}
     _sprite: {fileID: 0}
     _spriteRenderer: {fileID: 501156913}
-    _type: 1
-    _state: 1
     _animator: {fileID: 0}
   Properties:
-    _attackSpeed: 0.2
+    _attackSpeed: 3
     _projectilePrefab: {fileID: 9016540880761141108, guid: d0b71fb7468779d4c9b5f5e6128f4465, type: 3}
     _radius: {fileID: 2098165506}
     _attackRadius: 3
-    _attackDamage: 1
+    _attackDamage: 2
     _isSelected: 0
     _attackType: 0
     _damageTypes: 00000000

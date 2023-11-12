@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
 public class Round
 {
-    [SerializeField] private List<Wave> _wavesInRound = new();
-    [SerializeField] private int _currentWave;
+    public Wave[] _wavesInRound;
+    public int _currentWave;
     private int _waveToSpawnTogether;
     private bool _doneSpawning = false;
     public bool DoneSpawning { get => _doneSpawning; set => _doneSpawning = value; }
@@ -31,29 +32,45 @@ public class Round
             _wavesInRound[index] = value;
         }
     }
+    public Round(Wave[] waves)
+    {
+        _wavesInRound = waves;
+        _currentWave = 0;
+        _waveToSpawnTogether = -1;
+    }
     public Round(List<Wave> waves)
     {
-        _wavesInRound = waves;
+        _wavesInRound = waves.ToArray();
         _currentWave = 0;
         _waveToSpawnTogether = -1;
     }
-    public Round(List<Wave> waves, WaveSpawnType waveSpawning)
-    {
-        _wavesInRound = waves;
-        _currentWave = 0;
-        _spawnType = waveSpawning;
-        _waveToSpawnTogether = -1;
-    }
-    public Round(List<Wave> waves, int waveToStartSpawningTogether)
+    public Round(Wave[] waves, int waveToStartSpawningTogether)
     {
         _wavesInRound = waves;
         _currentWave = 0;
         _spawnType = WaveSpawnType.TogetherAtWave;
         _waveToSpawnTogether = waveToStartSpawningTogether;
     }
-    public void AddWave(Wave wave)
+    public Round(Wave[] waves, WaveSpawnType waveSpawning)
     {
-        _wavesInRound.Add(wave);
+        _wavesInRound = waves;
+        _currentWave = 0;
+        _spawnType = waveSpawning;
+        _waveToSpawnTogether = -1;
+    }
+    public Round(List<Wave> waves, WaveSpawnType waveSpawning)
+    {
+        _wavesInRound = waves.ToArray();
+        _currentWave = 0;
+        _spawnType = waveSpawning;
+        _waveToSpawnTogether = -1;
+    }
+    public Round(List<Wave> waves, int waveToStartSpawningTogether)
+    {
+        _wavesInRound = waves.ToArray();
+        _currentWave = 0;
+        _spawnType = WaveSpawnType.TogetherAtWave;
+        _waveToSpawnTogether = waveToStartSpawningTogether;
     }
     public Wave GetCurrentWave()
     {
@@ -63,7 +80,7 @@ public class Round
     {
         return round[round._currentWave];
     }
-    public List<Wave> GetWavesInRound()
+    public Wave[] GetWavesInRound()
     {
         return _wavesInRound;
     }
@@ -88,10 +105,10 @@ public class Round
     [Serializable]
     public struct Wave
     {
-        [SerializeField] internal int shapes;
-        [SerializeField] internal float timeBetweenSpawns;
-        [SerializeField] internal Layer.Layers layer;
-        [SerializeField] internal AbstractShapeEnemy.ShapeEnemyProperties.ShapeVariant variant;
+        public int shapes;
+        public float timeBetweenSpawns;
+        public Layer.Layers layer;
+        public AbstractShapeEnemy.ShapeEnemyProperties.ShapeVariant variant;
         public Wave(int shapes, float timeBetweenSpawns, Layer.Layers layer, AbstractShapeEnemy.ShapeEnemyProperties.ShapeVariant variant)
         {
             this.shapes = shapes;
