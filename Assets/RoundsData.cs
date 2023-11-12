@@ -50,14 +50,14 @@ public class RoundsData
         //Round 7:
         new Round(
         new Round.Wave[]{
-                 Round.MakeWave(5, 5f, Layer.Layers.Red),
+                 Round.MakeWave(20, 0.5f, Layer.Layers.Blue),
             },Round.WaveSpawnType.Seperate
             ),
         //Round 8:
         new Round(
         new Round.Wave[]{
                  Round.MakeWave(5, 5f, Layer.Layers.Red),
-                 Round.MakeWave(10, 2.5f, Layer.Layers.Red),
+                 Round.MakeWave(10, 2.5f, Layer.Layers.Red, REGEN),
             },Round.WaveSpawnType.Seperate
             ),
         //Round 9:
@@ -84,8 +84,8 @@ public class RoundsData
         new Round(
         new Round.Wave[]{
                  Round.MakeWave(50, 0.05f, Layer.Layers.White),
-                 Round.MakeWave(10, 1f, Layer.Layers.Green),
-                 Round.MakeWave(20, 0.25f, Layer.Layers.Blue),
+                 Round.MakeWave(10, 1f, Layer.Layers.Green, REGEN),
+                 Round.MakeWave(20, 0.25f, Layer.Layers.Blue, REGEN),
             },Round.WaveSpawnType.Together
             ),
         //Round 13:

@@ -20,19 +20,60 @@ public abstract class Tower : LivingEntity
     internal List<SpecialUpgrades> _specialUpgrades = new List<SpecialUpgrades>();
     public Color GizmosColor { get => _gizmosColor; set => _gizmosColor = value; }
     public AbstractShapeEnemy NextAttackableShape { get => _nextAttackableShape; set => _nextAttackableShape = value; }
+    public bool Placed = false;
+    public bool CanBePlaced { get; set; }
+    private int currentCollisions = 0;
+    public PlaceState PlacingState;
+    [SerializeField] protected int _basePrice;
+
+    public enum PlaceState
+    {
+        NotPlacing,
+        Placing,
+        Placed,
+    }
     public override void Awake()
     {
         base.Awake();
         EntityType = Type.Tower;
         //TEST STATS
-/*        Properties._attackType = TowerProperties.AttackType.First;
-        Properties._attackDamage = 1;
-        Properties._attackSpeed = 1;
-        Properties._damageType = DamageTypes.Spikes;*/
+        /*        Properties._attackType = TowerProperties.AttackType.First;
+                Properties._attackDamage = 1;
+                Properties._attackSpeed = 1;
+                Properties._damageType = DamageTypes.Spikes;*/
         StartCoroutine(Attack_cr());
     }
     public virtual void Update()
     {
+        if (Properties._isSelected && !Placed)
+        {
+            if (!CanBePlaced)
+            {
+                Properties._radius.GetComponent<SpriteRenderer>().color = Color.red;
+            }
+            else
+            {
+                Properties._radius.GetComponent<SpriteRenderer>().color = Color.white;
+            }
+        }
+        if (!Placed)
+        {
+            if (currentCollisions == 0) CanBePlaced = true;
+            else CanBePlaced = false;
+            switch (PlacingState)
+            {
+                case PlaceState.Placing:
+                    Vector2 mousePos = Input.mousePosition;
+                    Vector2 mouseToWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
+                    transform.position = mouseToWorldPos;
+
+                    break;
+                case PlaceState.Placed:
+                    Placed = true;
+                    break;
+            }
+            return;
+        }
         _hits = null;
         _shapesInRange = null;
         _nextAttackableShape = null;
@@ -51,15 +92,17 @@ public abstract class Tower : LivingEntity
         {
             transform.right = _nextAttackableShape.transform.position - transform.position;
         }
+
         HandleSelection();
 
     }
     private void HandleSelection()
     {
+        if (!Placed) return;
         if (Input.GetMouseButtonDown(0))
         {
             //TODO: refactor to be a raycast at the mouse position and if it hits this towers collider then call TowerSelected.
-            if(Input.mousePosition.x > (Screen.width / 5f) * 4)
+            if(Input.mousePosition.x > (Screen.width / 5f) * 4 && UpgradeGUI.IsActive())
                 return;
             Vector2 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (Vector2.Distance(point, transform.position) < 0.5f)
@@ -72,19 +115,21 @@ public abstract class Tower : LivingEntity
             }
         }
     }
-    private void TowerSelected()
+    public void TowerSelected()
     {
         if (Properties._isSelected) return;
         Properties._isSelected = true;
         Properties._radius.SetActive(true);
-        UpgradeGUI.SetCurrentTower(this);
+        if(Placed)
+            UpgradeGUI.SetCurrentTower(this);
     }
-    private void TowerDeselected()
+    public void TowerDeselected()
     {
         if (!Properties._isSelected) return;
         Properties._isSelected = false;
         Properties._radius.SetActive(false);
-        UpgradeGUI.SetCurrentTower(null);
+        if(UpgradeGUI.GetCurrentTower() == this && Placed)
+            UpgradeGUI.SetCurrentTower(null);
 
     }
     protected void Init_Tower(float attackSpeed, float attackRadius, float attackDamage, List<DamageTypes> damageTypes, int pierce, TowerProperties.Targeting attackType, GameObject projectilePrefab, float projectileSpeed, float travelDistance)
@@ -285,6 +330,7 @@ public abstract class Tower : LivingEntity
                 if(_shapesInRange.Count <= 0) return false;
                 if(_hits == null) return false;
                 if(_hits.Length <= 0) return false;
+                if (!Placed) return false;
                 return true;
             });
             //attack
@@ -328,7 +374,40 @@ public abstract class Tower : LivingEntity
             enemy.OnDebuffAdded?.Invoke(d, this);
         }
     }
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        currentCollisions++;
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        currentCollisions--;
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.layer == 9) //is the collided object a piece of the track?
+        {
+            CanBePlaced = false;
+        }
+    }
+    private void OnMouseUp()
+    {
+        if (Placed) return;
+        if (CanBePlaced)
+        {
+            Placed = true;
+            GameUtils.IsPlacing = false;
+            TowerDeselected();
+            PlacingState = PlaceState.Placed;
+        }
+    }
+    public int GetBasePrice()
+    {
+        return _basePrice;
+    }
+    protected void UpdateRadiusGraphics()
+    {
+        Properties._radius.transform.localScale = new Vector3(Properties._attackRadius, Properties._attackRadius, Properties._attackRadius);
+    }
     [Serializable]
     public struct TowerProperties
     {

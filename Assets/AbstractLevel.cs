@@ -23,8 +23,6 @@ public abstract class AbstractLevel : MonoBehaviour
         LevelProperties props = GameManager.Instance.CurrentLevel.Properties;
         props.Cash = Properties.StartingCash;
         GameManager.Instance.CurrentLevel.Properties = props;
-        JsonHelper.WriteRoundDataToJson();
-        RoundsData data = JsonHelper.GetRoundsData();
     }
 
     [Serializable]

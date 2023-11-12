@@ -25,7 +25,7 @@ public class PlayRound : MonoBehaviour
     private State _state;
     private bool _wasFast = false;
     public static Action OnRoundStarted;
-    private Round[] rounds = JsonHelper.GetRoundsData()._rounds;
+    private Round[] rounds = new RoundsData()._rounds;
     public static int CurrentRound { get; private set; } = 0;
     public static event Action OnStateChanged;
     [Serializable]

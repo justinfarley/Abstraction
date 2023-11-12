@@ -16,6 +16,7 @@ public class UpgradeGUI : AbstractTowerUpgradePaths
 {
     public static Action OnCurrentTowerUpdated;
     private static Tower _currentTower;
+    private static bool _isActive;
     public static Tower CurrentTower
     {
         get
@@ -61,16 +62,18 @@ public class UpgradeGUI : AbstractTowerUpgradePaths
     }
     private void UpdateGUI()
     {
-        if (CurrentTower == null)
+        if (CurrentTower == null || !CurrentTower.Placed)
         {
             transform.GetChild(0).gameObject.SetActive(false);
             transform.GetChild(1).gameObject.SetActive(false);
+            _isActive = false;
             return;
         }
         else
         {
             transform.GetChild(0).gameObject.SetActive(true);
             transform.GetChild(1).gameObject.SetActive(true);
+            _isActive = true;
             string towerName = _currentTower.Name;
             string topPath = $"SO/Upgrades/{towerName}/TopPath";
             string middlePath = $"SO/Upgrades/{towerName}/MiddlePath";
@@ -152,5 +155,13 @@ public class UpgradeGUI : AbstractTowerUpgradePaths
     {
         _tower = tower;
         CurrentTower = tower;
+    }
+    public static Tower GetCurrentTower()
+    {
+        return _tower;
+    }
+    public static bool IsActive()
+    {
+        return _isActive;
     }
 }

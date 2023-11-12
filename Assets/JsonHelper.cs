@@ -5,7 +5,11 @@ using UnityEngine;
 
 public class JsonHelper : MonoBehaviour
 {
-    static string path = Application.persistentDataPath + "/RoundsData.json";
+    static string path;
+    private void Awake()
+    {
+        path = Application.persistentDataPath + "/RoundsData.json";
+    }
     public static RoundsData GetRoundsData()
     {
         string jsonData = File.ReadAllText(path);

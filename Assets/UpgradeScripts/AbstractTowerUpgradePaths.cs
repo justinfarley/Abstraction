@@ -19,13 +19,12 @@ public abstract class AbstractTowerUpgradePaths : MonoBehaviour
         if (nextIndex >= path.Length) return;
         if (GameManager.Instance.CurrentLevel.Properties.Cash < path[nextIndex].Price) return; //guard clause
         GameManager.Instance.AddMoney(-path[nextIndex].Price);
+        print(_tower);
         _tower.Properties._attackDamage += path[nextIndex].DamageIncrease;
 
         _tower.AddSpecialUpgrade(path[nextIndex].SpecialUpgrade);
-        print(_tower.Properties._attackRadius);
         _tower.Properties._attackRadius += path[nextIndex].RangeIncrease;
         _tower.Properties._radius.transform.localScale = new Vector3(_tower.Properties._attackRadius, _tower.Properties._attackRadius, _tower.Properties._attackRadius);
-        print(_tower.Properties._attackRadius);
 
         _tower.TryDecreaseAttackSpeed(path[nextIndex].AttackDelayDecrease);
         //_tower.Properties._attackSpeed -= path[nextIndex].AttackDelayDecrease;

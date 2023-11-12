@@ -30,4 +30,7 @@ public static class GameUtils
         { AbstractLevel.LevelProperties.Mode.DoubleHealthDiamonds, 1.5f },
         { AbstractLevel.LevelProperties.Mode.Abstract, 1.75f },
     };
+
+    public static bool IsPlacing;
+
 }
