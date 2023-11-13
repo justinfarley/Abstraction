@@ -15,15 +15,8 @@ public class Dragable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     [SerializeField] private GameObject _towerPrefab;
     [SerializeField] private TMP_Text _priceText, _escToCancelText;
     private Tower _newTower;
-    private static PlaceType _type; //get from game settings
     private bool _mouseDown = false;
     private int _basePrice;
-    
-    public enum PlaceType
-    {
-        Drag,
-        Click,
-    }
     //TODO: implement a way to cancel once already placing
     private void Awake()
     {
@@ -87,22 +80,18 @@ public class Dragable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     }
     private void DragPointerDown()
     {
-        print("drag down");
-        if (_type != PlaceType.Drag || GameUtils.IsPlacing) return;
+        if (GameUtils.IsPlacing) return;
         if(GameManager.Instance.CurrentLevel.Properties.Cash >= _basePrice)
             _mouseDown = true;
 
     }
     private void DragPointerUp()
     {
-        print("drag up");
-        if (_type != PlaceType.Drag) return;
         if (_newTower == null) return;
         if(_newTower.PlacingState != Tower.PlaceState.Placing) return;
         _mouseDown = false;
         if (_newTower.GetComponent<Tower>().CanBePlaced)
         {
-            print("placed");
             PlaceTower();
         }
     }

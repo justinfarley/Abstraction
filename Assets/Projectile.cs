@@ -38,15 +38,26 @@ public class Projectile : Entity, IDamageable
         _pierce--;
         if (_pierce <= 0) Destroy(gameObject);
     }
-    public static Projectile Instantiate(GameObject prefab, Vector3 position, Quaternion rotation, Tower sourceParent)
+    public static Projectile InstantiateDirect(GameObject prefab, Vector3 position, Quaternion rotation, Tower sourceParent)
     {
         GameObject go = Instantiate(prefab, position, rotation);
         Projectile p = go.GetComponent<Projectile>();
         p.Properties._sourceParent = sourceParent;
         p._speed = sourceParent.Properties._projectileSpeed;
         p.name = $"Projectile";
-        p.Properties._target = sourceParent.NextAttackableShape != null ? sourceParent.NextAttackableShape.transform : null;
-        p.Properties._dir = sourceParent.NextAttackableShape != null ? ((sourceParent.NextAttackableShape.transform.position) - sourceParent.transform.position) : Vector2.zero;
+        p.Properties._target = sourceParent.NextAttackableShape.transform;
+        p.Properties._dir = ((sourceParent.NextAttackableShape.transform.position) - sourceParent.transform.position);
+        p.Properties._distBeforeDespawn = sourceParent.Properties._projectileTravelDistance;
+        p._pierce = sourceParent.Properties._projectilePierce;
+        return p;
+    }
+    public static Projectile InstantiateIndirect(GameObject prefab, Vector2 position, Quaternion rotation, Tower sourceParent)
+    {
+        GameObject go = Instantiate(prefab, position, rotation);
+        Projectile p = go.GetComponent<Projectile>();
+        p.Properties._sourceParent = sourceParent;
+        p._speed = sourceParent.Properties._projectileSpeed;
+        p.name = $"Projectile";
         p.Properties._distBeforeDespawn = sourceParent.Properties._projectileTravelDistance;
         p._pierce = sourceParent.Properties._projectilePierce;
         return p;
@@ -85,7 +96,6 @@ public class Projectile : Entity, IDamageable
         if (collision.gameObject.GetComponent<AbstractShapeEnemy>())
         {
             AbstractShapeEnemy enemy = collision.gameObject.GetComponent<AbstractShapeEnemy>();
-            print($"Dealing damage to {enemy.name}");
             Properties._sourceParent.AddTowerDebuffsToShape(enemy);
             if(_pierce >= 1)
                 DealDamage(enemy, _towerProperties._damageTypes);
@@ -93,7 +103,7 @@ public class Projectile : Entity, IDamageable
     }
     private void OnBecameInvisible()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
     [Serializable]
     public struct ProjectileProperties

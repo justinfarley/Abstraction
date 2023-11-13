@@ -10,21 +10,21 @@ public class RoundsData
         //Round 1
         new Round(
       new Round.Wave[]{
-                Round.MakeWave(10, 1f, Layer.Layers.White),
+                Round.MakeWave(20, 0.5f, Layer.Layers.White),
             },Round.WaveSpawnType.Seperate
         ),
         //Round 2: Introduce Yellows
         new Round(
         new Round.Wave[]{
                  Round.MakeWave(3, 2f, Layer.Layers.Yellow),
-                 Round.MakeWave(10, 0.75f, Layer.Layers.White),
+                 Round.MakeWave(30, 0.75f, Layer.Layers.White),
             },Round.WaveSpawnType.Seperate
             ),
         //Round 3
         new Round(
         new Round.Wave[]{
-                 Round.MakeWave(5, 0.6f, Layer.Layers.Yellow),
-                 Round.MakeWave(20, 0.4f, Layer.Layers.White),
+                 Round.MakeWave(10, 0.6f, Layer.Layers.Yellow),
+                 Round.MakeWave(40, 0.4f, Layer.Layers.White),
             },Round.WaveSpawnType.Seperate
             ),
         //Round 4: introduce Blues
@@ -91,7 +91,7 @@ public class RoundsData
         //Round 13:
         new Round(
         new Round.Wave[]{
-                 Round.MakeWave(200, 0.05f, Layer.Layers.White),
+                 Round.MakeWave(200, 0.1f, Layer.Layers.Yellow, REGEN),
                  Round.MakeWave(20, 0.25f, Layer.Layers.Orange),
             },Round.WaveSpawnType.Together
             ),
@@ -120,7 +120,7 @@ public class RoundsData
         //Round 17:
         new Round(
         new Round.Wave[]{
-                Round.MakeWave(50, 0.25f, Layer.Layers.Green),
+                Round.MakeWave(150, 0.25f, Layer.Layers.Green),
                 Round.MakeWave(10, 1f, Layer.Layers.Brown),
             },Round.WaveSpawnType.Together
             ),
@@ -156,11 +156,30 @@ public class RoundsData
                 Round.MakeWave(100, 0.375f, Layer.Layers.Orange, REGEN),
             },Round.WaveSpawnType.Seperate
             ),
-        //Round 22: TEST ROUND
+        //Round 22:
         new Round(
         new Round.Wave[]{
-                Round.MakeWave(1, 1f, Layer.Layers.Green, REGEN),
+                Round.MakeWave(100, 0.5f, Layer.Layers.Orange, REGEN),
             },Round.WaveSpawnType.Seperate
+            ),
+        //Round 23:
+        new Round(
+        new Round.Wave[]{
+                Round.MakeWave(200, 0.25f, Layer.Layers.Orange, REGEN),
+            },Round.WaveSpawnType.Seperate
+            ),
+        //Round 24:
+        new Round(
+        new Round.Wave[]{
+                Round.MakeWave(8, 0.75f, Layer.Layers.Purple),
+            },Round.WaveSpawnType.Seperate
+            ),
+        //Round 25:
+        new Round(
+        new Round.Wave[]{
+                Round.MakeWave(125, 0.1f, Layer.Layers.Blue),
+                Round.MakeWave(25, 0.5f, Layer.Layers.Brown),
+            },Round.WaveSpawnType.Together
             ),
         };
 }

@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Spy Spikes
   Description: Grants Ability to see camo shapes! Slightly increased range and projectile
-    speed.
+    speed. +1 Pierce.
   Price: 350
-  PierceIncrease: 0
+  PierceIncrease: 1
   DamageIncrease: 0
   AttackDelayDecrease: 0.05
-  RangeIncrease: 0.5
+  RangeIncrease: 0.2
   ProjectileSpeedIncrease: 0
   ProjectileTravelDistanceIncrease: 0
   DamageTypesToAdd: 
+  DebuffsToAdd: 
   canHitCamo: 1
   upgradeSprite: {fileID: 21300000, guid: 4f3a106299767d146975053c7be09b97, type: 3}
   SpecialUpgrade: 0

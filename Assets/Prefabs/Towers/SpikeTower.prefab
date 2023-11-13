@@ -108,10 +108,10 @@ MonoBehaviour:
     _spriteRenderer: {fileID: 8748170516787075374}
     _animator: {fileID: 0}
   Properties:
-    _attackSpeed: 3
+    _attackSpeed: 1
     _projectilePrefab: {fileID: 9016540880761141108, guid: d0b71fb7468779d4c9b5f5e6128f4465, type: 3}
     _radius: {fileID: 8748170517320819229}
-    _attackRadius: 3
+    _attackRadius: 2
     _attackDamage: 2
     _isSelected: 0
     _attackType: 0
@@ -144,18 +144,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010349989, y: -0.006533116}
+  m_Offset: {x: -0.0103497505, y: 0.0020902455}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.3333334, y: 1.3333334}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.70757914, y: 0.87859505}
+  m_Size: {x: 0.90304184, y: 1.125798}
   m_EdgeRadius: 0
 --- !u!50 &6819756585032930140
 Rigidbody2D:

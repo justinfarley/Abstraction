@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: Better Projectiles
   Description: 'Enhanced Spikes! '
   Price: 750
-  PierceIncrease: 0
-  DamageIncrease: 1
+  PierceIncrease: 1
+  DamageIncrease: 3
   AttackDelayDecrease: 0
   RangeIncrease: 0.1
   ProjectileSpeedIncrease: 1

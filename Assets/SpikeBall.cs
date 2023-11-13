@@ -15,7 +15,6 @@ public class SpikeBall : Projectile
     }
     private void FixedUpdate()
     {
-        print(_pierce);
         //transform.Rotate(new Vector3(0, 0, Random.Range(-2,3)));
     }
     public override void OnTriggerEnter2D(Collider2D collision)
@@ -23,7 +22,6 @@ public class SpikeBall : Projectile
         if (collision.gameObject.GetComponent<AbstractShapeEnemy>())
         {
             AbstractShapeEnemy enemy = collision.gameObject.GetComponent<AbstractShapeEnemy>();
-            print($"Exploding at {enemy.name}");
             DealDamage(enemy, _spikeTower.Properties._damageTypes);
         }
     }
@@ -35,7 +33,6 @@ public class SpikeBall : Projectile
     }
     private void OnDestroy()
     {
-        print(spawnedPrefab);
         //Explode(spawnedPrefab);
     }
     public virtual void Explode(GameObject prefab)
@@ -51,11 +48,12 @@ public class SpikeBall : Projectile
         };
         for (int i = 0; i < 8; i++)
         {
-            Projectile projectile = Projectile.Instantiate(prefab, transform.position, Quaternion.Euler(0,0,0), _spikeTower);
+            Projectile projectile = Projectile.InstantiateIndirect(prefab, transform.position, Quaternion.Euler(0,0,0), _spikeTower);
             projectile.Properties._dir = dirs[i];
             projectile.Properties._distBeforeDespawn += 5f;
             projectile.isDirect = false;
             projectile.transform.rotation = Quaternion.FromToRotation(Vector2.right, dirs[i]);
+            projectile.Pierce = 200;
         }
         Destroy(this.gameObject);
     }

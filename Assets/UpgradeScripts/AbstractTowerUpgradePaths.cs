@@ -19,7 +19,6 @@ public abstract class AbstractTowerUpgradePaths : MonoBehaviour
         if (nextIndex >= path.Length) return;
         if (GameManager.Instance.CurrentLevel.Properties.Cash < path[nextIndex].Price) return; //guard clause
         GameManager.Instance.AddMoney(-path[nextIndex].Price);
-        print(_tower);
         _tower.Properties._attackDamage += path[nextIndex].DamageIncrease;
 
         _tower.AddSpecialUpgrade(path[nextIndex].SpecialUpgrade);

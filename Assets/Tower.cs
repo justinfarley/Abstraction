@@ -336,7 +336,6 @@ public abstract class Tower : LivingEntity
             //attack
             if (_nextAttackableShape)
             {
-                print($"Next damageable: {_nextAttackableShape.name}");
                 Attack();
             }
             //DealDamage(_nextAttackableShape, Properties._attackDamage, Properties._damageType);

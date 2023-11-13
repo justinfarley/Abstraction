@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: fa288b3c489670445ad114a296316574, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -132,7 +132,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &6132188123416829262
 MonoBehaviour:
@@ -152,9 +152,8 @@ MonoBehaviour:
     _entityCollider: {fileID: 7891677310301004390}
     _sprite: {fileID: 21300000, guid: fa288b3c489670445ad114a296316574, type: 3}
     _spriteRenderer: {fileID: 4163963942429416084}
-    _type: 5
-    _state: 3
     _animator: {fileID: 0}
   Properties:
     _target: {fileID: 0}
+  isDirect: 0
   spawnedPrefab: {fileID: 9016540880761141108, guid: d0b71fb7468779d4c9b5f5e6128f4465, type: 3}

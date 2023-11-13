@@ -171,8 +171,10 @@ public abstract class AbstractShapeEnemy : LivingEntity
                 newShape.gameObject.AddComponent<Regen>().SetBaseLayer(GetComponent<Regen>().GetBaseLayer());
                 newShape.GetComponent<Regen>().StartRegen();
                 newShape.name += " (Regen)";
-                GameManager.Instance.CurrentShapesOnScreen.Add(newShape);
+
             }
+            if (!GameManager.Instance.CurrentShapesOnScreen.Contains(newShape))
+                GameManager.Instance.CurrentShapesOnScreen.Add(newShape);
             newShape.Properties._shapeVariant = Properties._shapeVariant;
             newShape.ChangedVariant(Properties._shapeVariant);
         }   

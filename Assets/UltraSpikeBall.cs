@@ -17,7 +17,6 @@ public class UltraSpikeBall : SpikeBall
     public override void Explode(GameObject prefab)
     {
         isExploding = true;
-        print("EXPLODING");
         //code to instantiate 4 SPIKE BALLS from the position and make them go the 4 directions:
         //(1,1), (-1,1), (1,-1), (-1,-1)
         Vector2[] dirs =
@@ -26,10 +25,11 @@ public class UltraSpikeBall : SpikeBall
         };
         for (int i = 0; i < dirs.Length; i++)
         {
-            Projectile projectile = Projectile.Instantiate(prefab, transform.position, Quaternion.Euler(0, 0, 0), _spikeTower);
+            Projectile projectile = Projectile.InstantiateIndirect(prefab, transform.position, Quaternion.Euler(0, 0, 0), _spikeTower);
             projectile.Properties._dir = dirs[i];
             projectile.Properties._distBeforeDespawn += 1f;
             projectile.isDirect = false;
+            projectile.Pierce = 1;
             projectile.transform.rotation = Quaternion.FromToRotation(Vector2.right, dirs[i]);
         }
         Destroy(this.gameObject);

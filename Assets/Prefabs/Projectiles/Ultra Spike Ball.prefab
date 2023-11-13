@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -106,7 +106,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &1969607397244201050
 BoxCollider2D:
@@ -152,9 +152,8 @@ MonoBehaviour:
     _entityCollider: {fileID: 1969607397244201050}
     _sprite: {fileID: 0}
     _spriteRenderer: {fileID: 314314445714691076}
-    _type: 5
-    _state: 3
     _animator: {fileID: 0}
   Properties:
     _target: {fileID: 0}
+  isDirect: 0
   spawnedPrefab: {fileID: 2044507397989424815, guid: f69c84e63fb3f6f4599fb2fb6ca17782, type: 3}

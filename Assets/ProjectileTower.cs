@@ -26,11 +26,7 @@ public class ProjectileTower : Tower
         //spawn projectile
         //parent projectile to this gameobject
         //send towards the target shape
-        Projectile projectile = Projectile.Instantiate(_projectile, _projectileSpawnPos, Quaternion.identity, this);
-        projectile.name = $"{Properties._damageTypes} Projectile";
-        projectile.Properties._target = NextAttackableShape.transform;
-        projectile.Properties._dir = NextAttackableShape.transform.position - transform.position;
-        projectile.Properties._distBeforeDespawn = Properties._projectileTravelDistance;
+        Projectile projectile = Projectile.InstantiateDirect(_projectile, _projectileSpawnPos, Quaternion.identity, this);
     }
     public override void OnDrawGizmos()
     {

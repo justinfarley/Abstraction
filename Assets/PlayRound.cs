@@ -216,7 +216,6 @@ public class PlayRound : MonoBehaviour
         }
         if (numWaves >= round.GetWavesInRound().Length)
         {
-            print("done spawning everything");
             round.DoneSpawning = true;
             yield break;
         }

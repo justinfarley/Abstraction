@@ -74,12 +74,13 @@ public class SpikeTower : ProjectileTower
 
     private void Attack_UltraSpikeBall()
     {
-        Projectile.Instantiate(_ultraSpikeBall, _projectileSpawnPos, Quaternion.identity, this);
+        Projectile.InstantiateDirect(_ultraSpikeBall, _projectileSpawnPos, Quaternion.identity, this);
     }
 
     private void Attack_SpikeBall()
     {
-        Projectile.Instantiate(_spikeBall, _projectileSpawnPos, Quaternion.identity, this);
+        print("SHOT BALL");
+        Projectile.InstantiateDirect(_spikeBall, _projectileSpawnPos, Quaternion.identity, this);
     }
 
     private void Attack_QuintupleShot()
@@ -87,7 +88,7 @@ public class SpikeTower : ProjectileTower
         float offset = 0.3f;
         for (int i = 0; i < 5; i++)
         {
-            Projectile projectile = Projectile.Instantiate(_projectile, _projectileSpawnPos, Quaternion.identity, this);
+            Projectile projectile = Projectile.InstantiateDirect(_projectile, _projectileSpawnPos, Quaternion.identity, this);
             Vector3 addVector = Vector3.zero;
             if (i == 0)
             {
@@ -114,7 +115,7 @@ public class SpikeTower : ProjectileTower
         float offset = 0.6f;
         for (int i = 0; i < 3; i++)
         {
-            Projectile projectile = Projectile.Instantiate(_projectile, _projectileSpawnPos, Quaternion.identity, this);
+            Projectile projectile = Projectile.InstantiateDirect(_projectile, _projectileSpawnPos, Quaternion.identity, this);
             Vector3 addVector = Vector3.zero;
             if (i == 0)
             {

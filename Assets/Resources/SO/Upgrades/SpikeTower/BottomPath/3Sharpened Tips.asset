@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6bb8ad582ccab04d901f98211e04759, type: 3}
-  m_Name: 3Spikiest Spikes
+  m_Name: 3Sharpened Tips
   m_EditorClassIdentifier: 
-  Name: rename later
-  Description: rename
+  Name: Sharpened Tips
+  Description: Pierce and damage, what's not to love?
   Price: 890
   PierceIncrease: 2
   DamageIncrease: 1

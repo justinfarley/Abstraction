@@ -16,11 +16,11 @@ MonoBehaviour:
   Description: Now shoots balls of spikes which split into more spikes!
   Price: 4750
   PierceIncrease: 1
-  DamageIncrease: 0
+  DamageIncrease: 5
   AttackDelayDecrease: 0
-  RangeIncrease: 0
+  RangeIncrease: 1.5
   ProjectileSpeedIncrease: 0
-  ProjectileTravelDistanceIncrease: 0
+  ProjectileTravelDistanceIncrease: 10
   DamageTypesToAdd: 
   DebuffsToAdd: 
   canHitCamo: 0
