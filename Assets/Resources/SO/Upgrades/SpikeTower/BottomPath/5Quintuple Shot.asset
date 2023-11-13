@@ -15,10 +15,10 @@ MonoBehaviour:
   Name: Quintuple Shot
   Description: 5 SPIKES PER SHOT!!
   Price: 20575
-  PierceIncrease: 3
+  PierceIncrease: 1
   DamageIncrease: 15
   AttackDelayDecrease: 0.5
-  RangeIncrease: 0
+  RangeIncrease: 1
   ProjectileSpeedIncrease: 1
   ProjectileTravelDistanceIncrease: 1
   DamageTypesToAdd: 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Better Projectiles
   Description: 'Enhanced Spikes! '
-  Price: 750
+  Price: 1050
   PierceIncrease: 1
   DamageIncrease: 3
   AttackDelayDecrease: 0

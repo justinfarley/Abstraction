@@ -112,16 +112,16 @@ public class RoundsData
         //Round 16:
         new Round(
         new Round.Wave[]{
+                Round.MakeWave(25, 0.1f, Layer.Layers.Blue),
                 Round.MakeWave(25, 0.1f, Layer.Layers.Green),
                 Round.MakeWave(25, 0.1f, Layer.Layers.Orange),
-                Round.MakeWave(25, 0.1f, Layer.Layers.Pink),
             },Round.WaveSpawnType.Seperate
             ),
         //Round 17:
         new Round(
         new Round.Wave[]{
                 Round.MakeWave(150, 0.25f, Layer.Layers.Green),
-                Round.MakeWave(10, 1f, Layer.Layers.Brown),
+                Round.MakeWave(10, 1f, Layer.Layers.Pink),
             },Round.WaveSpawnType.Together
             ),
         //Round 18:
@@ -181,5 +181,72 @@ public class RoundsData
                 Round.MakeWave(25, 0.5f, Layer.Layers.Brown),
             },Round.WaveSpawnType.Together
             ),
+        //Round 26:
+        new Round(
+        new Round.Wave[]{
+                Round.MakeWave(200, 0.05f, Layer.Layers.Pink),
+                Round.MakeWave(100, 0.1f, Layer.Layers.Orange),
+            },Round.WaveSpawnType.Together
+            ),
+        //Round 27:
+        new Round(
+        new Round.Wave[]{
+                Round.MakeWave(15, 0.25f, Layer.Layers.Silver),
+            },Round.WaveSpawnType.Seperate
+            ),
+        //Round 28:
+        new Round(
+        new Round.Wave[]{
+                Round.MakeWave(15, 0.25f, Layer.Layers.Purple, REGEN),
+                Round.MakeWave(15, 0.25f, Layer.Layers.Silver, REGEN),
+            },Round.WaveSpawnType.Seperate
+            ),
+        //Round 29:
+        new Round(
+        new Round.Wave[]{
+                Round.MakeWave(100, 0.05f, Layer.Layers.Pink, REGEN),
+                Round.MakeWave(10, 0.5f, Layer.Layers.Purple, CAMO),
+            },Round.WaveSpawnType.Together
+            ),
+        //Round 30:
+        new Round(
+        new Round.Wave[]{
+                Round.MakeWave(5, 1f, Layer.Layers.Brown),
+            },Round.WaveSpawnType.Seperate
+            ),
+        //Round 31:
+        new Round(
+        new Round.Wave[]{
+                Round.MakeWave(50, 0.25f, Layer.Layers.Silver, REGEN),
+                Round.MakeWave(5, 1f, Layer.Layers.Brown),
+            },Round.WaveSpawnType.Seperate
+            ),
+        //Round 32:
+        new Round(
+        new Round.Wave[]{
+                Round.MakeWave(15, 0.5f, Layer.Layers.Brown, REGEN),
+            },Round.WaveSpawnType.Seperate
+            ),
+        //Round 33:
+        new Round(
+        new Round.Wave[]{
+                Round.MakeWave(150, 0.05f, Layer.Layers.Pink, REGEN),
+                Round.MakeWave(15, 0.5f, Layer.Layers.Brown, REGEN),
+            },Round.WaveSpawnType.Together
+            ),
+        //Round 34:
+        new Round(
+        new Round.Wave[]{
+                Round.MakeWave(50, 0.05f, Layer.Layers.White, REGEN),
+                Round.MakeWave(50, 0.05f, Layer.Layers.Yellow, REGEN),
+                Round.MakeWave(50, 0.05f, Layer.Layers.Blue, REGEN),
+                Round.MakeWave(50, 0.05f, Layer.Layers.Red, REGEN),
+                Round.MakeWave(50, 0.05f, Layer.Layers.Green, REGEN),
+                Round.MakeWave(50, 0.05f, Layer.Layers.Orange, REGEN),
+                Round.MakeWave(50, 0.05f, Layer.Layers.Pink, REGEN),
+                Round.MakeWave(20, 0.1f, Layer.Layers.Brown, REGEN),
+            },Round.WaveSpawnType.Seperate
+            ),
+
         };
 }

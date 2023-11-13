@@ -8,9 +8,10 @@ public class SpikeTower : ProjectileTower
     [SerializeField] private GameObject _spikeBall, _ultraSpikeBall;
     public override void Awake()
     {
+        //TODO: change the damagetypes to only be spikes (it is set to All for testing)
         base.Awake();
         Init_Tower(1.5f, 2, 1,
-    new List<DamageTypes> { DamageTypes.Spikes }, 2, TowerProperties.Targeting.First,
+    new List<DamageTypes> { DamageTypes.All }, 2, TowerProperties.Targeting.First,
     _projectile, 3f, 3f);
         _projectileSpawnOffset = new Vector2(_projectileOffset, _projectileOffset);
         Name = "SpikeTower";

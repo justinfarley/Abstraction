@@ -6377,7 +6377,7 @@ MonoBehaviour:
   _level: {fileID: 1490845837}
   _playButton: {fileID: 875510272}
   _fastForwardButton: {fileID: 1485174169}
-  _startRound: 14
+  _startRound: 1
   _prefabPairs:
   - _layer: 1
     _prefab: {fileID: 2666691792321305079, guid: 65d12a2c252e3224091a5c9f0fd84f74, type: 3}
@@ -6393,8 +6393,14 @@ MonoBehaviour:
     _prefab: {fileID: 8777935706891022224, guid: 68d24c0d55a99824b8895572a2c67742, type: 3}
   - _layer: 7
     _prefab: {fileID: 8777935706891022224, guid: 7b53194f2c1313743b55182483eb4500, type: 3}
-  - _layer: 8
+  - _layer: 11
     _prefab: {fileID: 8777935706891022224, guid: f24a6b893fe77084991f7d9d8fe0f550, type: 3}
+  - _layer: 8
+    _prefab: {fileID: 8777935706891022224, guid: ae3d2ce449fdc7540b33349c7d804d40, type: 3}
+  - _layer: 9
+    _prefab: {fileID: 8777935706891022224, guid: 733027ec4c5bc754fa089640f846eee8, type: 3}
+  - _layer: 10
+    _prefab: {fileID: 8777935706891022224, guid: 33bdffd63c6c4b54b96e48bd0ad7866a, type: 3}
 --- !u!224 &2012301197
 RectTransform:
   m_ObjectHideFlags: 0

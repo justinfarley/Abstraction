@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Faster Spikes
   Description: Attack a little faster...
-  Price: 250
+  Price: 125
   PierceIncrease: 0
   DamageIncrease: 0
-  AttackDelayDecrease: 0.1
+  AttackDelayDecrease: 0.15
   RangeIncrease: 0
   ProjectileSpeedIncrease: 0
   ProjectileTravelDistanceIncrease: 0
   DamageTypesToAdd: 
+  DebuffsToAdd: 
   canHitCamo: 0
   upgradeSprite: {fileID: 0}
+  SpecialUpgrade: 0

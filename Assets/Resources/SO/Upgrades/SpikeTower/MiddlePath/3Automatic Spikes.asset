@@ -17,9 +17,9 @@ MonoBehaviour:
   Price: 1250
   PierceIncrease: 1
   DamageIncrease: 1
-  AttackDelayDecrease: 0.25
+  AttackDelayDecrease: 0.5
   RangeIncrease: 0
-  ProjectileSpeedIncrease: 1
+  ProjectileSpeedIncrease: 2
   ProjectileTravelDistanceIncrease: 2
   DamageTypesToAdd: 
   DebuffsToAdd: 

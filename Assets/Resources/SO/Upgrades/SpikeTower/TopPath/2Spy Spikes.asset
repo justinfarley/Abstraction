@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Spy Spikes
   Description: Grants Ability to see camo shapes! Slightly increased range and projectile
     speed. +1 Pierce.
-  Price: 350
+  Price: 200
   PierceIncrease: 1
   DamageIncrease: 0
   AttackDelayDecrease: 0.05

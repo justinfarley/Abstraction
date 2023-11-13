@@ -283,10 +283,11 @@ public abstract class AbstractShapeEnemy : LivingEntity
             new Color32(0,171,0,255), //green
             new Color32(255,125,0,255), //orange
             new Color32(255, 59, 209,255), //pink
-            new Color32(92, 47, 21,255), //brown
             new Color32(164, 0, 209,255), //purple
             new Color32(105, 105, 105,255), //silver
             new Color32(0,0,0,255), //Black
+            new Color32(92, 47, 21,255), //brown
+
         };
     }
 }

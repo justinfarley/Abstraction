@@ -34,4 +34,8 @@ public class UltraSpikeBall : SpikeBall
         }
         Destroy(this.gameObject);
     }
+    public override void DealDamage(AbstractShapeEnemy damageableEntity, List<DamageTypes> damageTypes)
+    {
+        base.DealDamage(damageableEntity, damageTypes);
+    }
 }

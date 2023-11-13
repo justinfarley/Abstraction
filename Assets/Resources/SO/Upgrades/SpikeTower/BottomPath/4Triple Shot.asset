@@ -15,11 +15,11 @@ MonoBehaviour:
   Name: Triple Shot
   Description: Throw 3 spikes instead of 1!
   Price: 3725
-  PierceIncrease: 0
-  DamageIncrease: 1
+  PierceIncrease: 1
+  DamageIncrease: 2
   AttackDelayDecrease: 0
-  RangeIncrease: 0
-  ProjectileSpeedIncrease: 1
+  RangeIncrease: 1
+  ProjectileSpeedIncrease: 2
   ProjectileTravelDistanceIncrease: 2
   DamageTypesToAdd: 
   DebuffsToAdd: 

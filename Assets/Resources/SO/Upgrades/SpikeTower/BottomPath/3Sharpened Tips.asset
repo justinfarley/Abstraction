@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Sharpened Tips
   Description: Pierce and damage, what's not to love?
-  Price: 890
+  Price: 650
   PierceIncrease: 2
   DamageIncrease: 1
   AttackDelayDecrease: 0

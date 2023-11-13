@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Rapid Fire Spikes
   Description: Even faster spikes with extra pierce
-  Price: 575
+  Price: 400
   PierceIncrease: 1
   DamageIncrease: 0
   AttackDelayDecrease: 0.25
   RangeIncrease: 0
-  ProjectileSpeedIncrease: 0
-  ProjectileTravelDistanceIncrease: 0
+  ProjectileSpeedIncrease: 2
+  ProjectileTravelDistanceIncrease: 4
   DamageTypesToAdd: 
+  DebuffsToAdd: 
   canHitCamo: 0
   upgradeSprite: {fileID: 0}
+  SpecialUpgrade: 0
