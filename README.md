@@ -1,2 +1,3 @@
 # Abstraction
-Abstraction Unity Project
+Abstraction is a Unity Project that takes the Tower Defense concept and builds on it.
+Place towers to fight against the evil shapes that will try to surpass your defenses! But beware, the shapes become stronger and stronger as you do too...
