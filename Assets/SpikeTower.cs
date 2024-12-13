@@ -6,13 +6,14 @@ using UnityEngine;
 public class SpikeTower : ProjectileTower
 {
     [SerializeField] private GameObject _spikeBall, _ultraSpikeBall;
+    [SerializeField] private Sprite _tripleShotSprite;
     public override void Awake()
     {
         //TODO: change the damagetypes to only be spikes (it is set to All for testing)
         base.Awake();
         Init_Tower(1.5f, 2, 1,
     new List<DamageTypes> { DamageTypes.All }, 2, TowerProperties.Targeting.First,
-    _projectile, 3f, 3f);
+    _projectile, 1.5f, 3f);
         _projectileSpawnOffset = new Vector2(_projectileOffset, _projectileOffset);
         Name = "SpikeTower";
         UpdateRadiusGraphics();
@@ -86,10 +87,9 @@ public class SpikeTower : ProjectileTower
 
     private void Attack_QuintupleShot()
     {
-        float offset = 0.3f;
+        float offset = 0.45f;
         for (int i = 0; i < 5; i++)
         {
-            Projectile projectile = Projectile.InstantiateDirect(_projectile, _projectileSpawnPos, Quaternion.identity, this);
             Vector3 addVector = Vector3.zero;
             if (i == 0)
             {
@@ -107,16 +107,15 @@ public class SpikeTower : ProjectileTower
             {
                 addVector = new Vector3(offset * 2, offset * 2, 0);
             }
-            projectile.Properties._dir = (NextAttackableShape.transform.position + addVector) - transform.position;
+            InstantiateAtDirection(((NextAttackableShape.transform.position + addVector) - transform.position).normalized);
         }
     }
-
     private void Attack_TripleShot()
     {
         float offset = 0.6f;
         for (int i = 0; i < 3; i++)
         {
-            Projectile projectile = Projectile.InstantiateDirect(_projectile, _projectileSpawnPos, Quaternion.identity, this);
+            Projectile projectile = Projectile.InstantiateIndirect(_projectile, _projectileSpawnPos, Quaternion.identity, this);
             Vector3 addVector = Vector3.zero;
             if (i == 0)
             {
@@ -126,8 +125,19 @@ public class SpikeTower : ProjectileTower
             {
                 addVector = new Vector3(-offset, -offset, 0);
             }
-            projectile.Properties._dir = (NextAttackableShape.transform.position + addVector) - transform.position;
+            projectile.GetComponent<SpriteRenderer>().sprite = _tripleShotSprite;
+            projectile.GetComponent<SpriteRenderer>().color = Color.white;
+            projectile.Properties._dir = ((NextAttackableShape.transform.position + addVector) - transform.position).normalized;
+            projectile.Properties._target = NextAttackableShape.transform;
         }
+    }
+    private void InstantiateAtDirection(Vector2 dir)
+    {
+        Projectile projectile = Projectile.InstantiateIndirect(_projectile, _projectileSpawnPos, Quaternion.identity, this);
+        projectile.GetComponent<SpriteRenderer>().sprite = _tripleShotSprite;
+        projectile.GetComponent<SpriteRenderer>().color = Color.white;
+        projectile.Properties._dir = dir;
+        projectile.Properties._target = NextAttackableShape.transform;
     }
 }
 

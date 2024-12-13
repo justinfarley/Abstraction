@@ -178,7 +178,7 @@ public class RoundsData
         new Round(
         new Round.Wave[]{
                 Round.MakeWave(125, 0.1f, Layer.Layers.Blue),
-                Round.MakeWave(25, 0.5f, Layer.Layers.Brown),
+                Round.MakeWave(25, 0.5f, Layer.Layers.Pink),
             },Round.WaveSpawnType.Together
             ),
         //Round 26:

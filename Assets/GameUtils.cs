@@ -17,7 +17,10 @@ public static class GameUtils
     //These are all attributes of the towers ... e.g. the upgrade cost of towers, the atk speed cap, etc.
     public static float GLOBAL_UPGRADE_COST_MULTIPLIER = 1f;
 
-    public static float GLOBAL_ATTACK_SPEED_CAP = 0.05f;
+    public static float GLOBAL_ATTACK_DELAY_CAP = 0.05f;
+
+    public static float GLOBAL_ATTACK_SPEED_CAP = 10f;
+
 
     //These are more general stuff
     public static Dictionary<AbstractLevel.LevelProperties.Mode, float> PriceMultipliers = new Dictionary<AbstractLevel.LevelProperties.Mode, float>

@@ -13,16 +13,23 @@ MonoBehaviour:
   m_Name: SpikeTowerUpgradeSprites
   m_EditorClassIdentifier: 
   topPathExc:
-  - {fileID: 21300000, guid: f87d825a1a3275e4fa45fc8219722513, type: 3}
-  - {fileID: 21300000, guid: 354dc8cba1c52024890962e81a43c779, type: 3}
-  - {fileID: 21300000, guid: fb19f037375e38a4590f8e27da3cd1f6, type: 3}
-  middlePathExc: []
+  - {fileID: 21300000, guid: 32e1011e87f855543b3353341973777a, type: 3}
+  - {fileID: 21300000, guid: 64dd3cf5d108a174c9d442e43d23892e, type: 3}
+  - {fileID: 21300000, guid: 7b79e5fb97b99b4448fac618742f3437, type: 3}
+  - {fileID: 21300000, guid: 98517a6dd8f42ee4aaa16fd2d2e83a9b, type: 3}
+  - {fileID: 21300000, guid: d841fa632e5772c4b825656bc046b794, type: 3}
+  middlePathExc:
+  - {fileID: 21300000, guid: 4c29cf8ccf0444146befcb596affbfa9, type: 3}
+  - {fileID: 21300000, guid: 79a08360dd6f4b344a7507ff44599ddf, type: 3}
+  - {fileID: 21300000, guid: e9c33c037311e0c4fbb9ec94ee03c98c, type: 3}
+  - {fileID: 21300000, guid: 973352d93f1e44f42b9b985be74fb775, type: 3}
+  - {fileID: 21300000, guid: 0db70b69e8c99eb4190e39271f2d50f9, type: 3}
   bottomPathExc:
-  - {fileID: 21300000, guid: 14238ce94115a484e8592b2685628f21, type: 3}
-  - {fileID: 21300000, guid: 9887dc2e12381ef4c8c9a5b7bb761f7c, type: 3}
-  - {fileID: 21300000, guid: aa47eac4d807a6c408244cfa428fc61b, type: 3}
-  - {fileID: 21300000, guid: a62643f8f01e82a4191caa8e0fb10688, type: 3}
-  - {fileID: 21300000, guid: 328434ec2063b054e8cf524c1b008867, type: 3}
+  - {fileID: 21300000, guid: a6bb6f0ed7bf9c54aaa52ca4523517ea, type: 3}
+  - {fileID: 21300000, guid: 7d5f3c1a4f7a4a4449a352ea17d00743, type: 3}
+  - {fileID: 21300000, guid: 7dc2c79d4329c8d44b51fdcbf3e7c03e, type: 3}
+  - {fileID: 21300000, guid: 59691433693aaef4796c585aaf60147f, type: 3}
+  - {fileID: 21300000, guid: 167af10545618404f8dafd035557ab35, type: 3}
   topPathCross: []
   middlePathCross: []
   bottomPathCross: []

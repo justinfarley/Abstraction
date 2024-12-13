@@ -25,5 +25,5 @@ MonoBehaviour:
   DamageTypesToAdd: 
   DebuffsToAdd: 
   canHitCamo: 1
-  upgradeSprite: {fileID: 21300000, guid: 4f3a106299767d146975053c7be09b97, type: 3}
+  upgradeSprite: {fileID: 21300000, guid: 6b149ba98e43a9242bff630ff6b2b3b7, type: 3}
   SpecialUpgrade: 0

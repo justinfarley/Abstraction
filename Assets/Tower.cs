@@ -353,8 +353,8 @@ public abstract class Tower : LivingEntity
     public void TryDecreaseAttackSpeed(float amount)
     {
         float newAm = Properties._attackSpeed - amount;
-        if (newAm < GameUtils.GLOBAL_ATTACK_SPEED_CAP)
-            Properties._attackSpeed = GameUtils.GLOBAL_ATTACK_SPEED_CAP;
+        if (newAm < GameUtils.GLOBAL_ATTACK_DELAY_CAP)
+            Properties._attackSpeed = GameUtils.GLOBAL_ATTACK_DELAY_CAP;
         else
             Properties._attackSpeed -= amount;
     }

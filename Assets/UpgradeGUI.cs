@@ -14,6 +14,7 @@ public class UpgradeGUI : AbstractTowerUpgradePaths
     public static Action OnCurrentTowerUpdated;
     private static Tower _currentTower;
     private static bool _isActive;
+    [SerializeField] private GameObject[] objectsToDisableWhilePanelActive;
     public static Tower CurrentTower
     {
         get
@@ -61,15 +62,23 @@ public class UpgradeGUI : AbstractTowerUpgradePaths
     {
         if (CurrentTower == null || !CurrentTower.Placed)
         {
-            transform.GetChild(0).gameObject.SetActive(false);
             transform.GetChild(1).gameObject.SetActive(false);
+            transform.GetChild(2).gameObject.SetActive(false);
+            foreach (var obj in objectsToDisableWhilePanelActive)
+            {
+                obj.SetActive(true);
+            }
             _isActive = false;
             return;
         }
         else
         {
-            transform.GetChild(0).gameObject.SetActive(true);
             transform.GetChild(1).gameObject.SetActive(true);
+            transform.GetChild(2).gameObject.SetActive(true);
+            foreach(var obj in objectsToDisableWhilePanelActive)
+            {
+                obj.SetActive(false);
+            }
             _isActive = true;
             string towerName = _currentTower.Name;
             string topPath = $"SO/Upgrades/{towerName}/TopPath";
@@ -273,7 +282,6 @@ public class UpgradeGUI : AbstractTowerUpgradePaths
         TMP_Text nameText = b.transform.GetChild(3).GetComponent<TMP_Text>();
         if (_currentTower.GetUpgrades()[pathCurrentIndex] >= upgradesOnPath.Length)
         {
-            //TODO: put like MAXED or something on that path
             button.interactable = false;
             buyText.text = "Fully Upgraded";
             nameText.text = "";
@@ -293,10 +301,7 @@ public class UpgradeGUI : AbstractTowerUpgradePaths
             upgradeSpriteRenderer.enabled = false;
             return;
         }
-        //TODO: also add logic for if 2 paths have been purchased already so it can LOCK the other one
-        //TODO: also add logic for only 3 upgrades and over on 1 path and 2 and below on 1 other one etc.
         int currentPathOnTowerIndex = _currentTower.GetUpgrades()[pathCurrentIndex];
-        //use index
         priceText.text = $"${upgradesOnPath[currentPathOnTowerIndex].Price}";
         nameText.text = $"{upgradesOnPath[currentPathOnTowerIndex].Name}";
         if(GameManager.Instance.CurrentLevel.Properties.Cash >= upgradesOnPath[currentPathOnTowerIndex].Price)

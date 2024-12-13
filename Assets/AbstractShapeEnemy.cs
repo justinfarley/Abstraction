@@ -33,9 +33,9 @@ public abstract class AbstractShapeEnemy : LivingEntity
         };
         OnLayerSwap += SwitchLayer;
         OnDebuffAdded += AddDebuff;
-        Properties._camoSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Shapes/triangle_camo.png");
-        Properties._normalSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Shapes/triangle_normal.png");
-        Properties._regenSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Shapes/triangle_regen.png");
+        Properties._camoSprite = Resources.Load<Sprite>("Sprites/Shapes/triangle_camo");
+        Properties._normalSprite = Resources.Load<Sprite>("Sprites/Shapes/triangle_normal");
+        Properties._regenSprite = Resources.Load<Sprite>("Sprites/Shapes/triangle_regen");
         
     }
     private void Start()
@@ -45,7 +45,7 @@ public abstract class AbstractShapeEnemy : LivingEntity
         MoveSpeed = Layer._layerSpeeds[CurrentLayer];
         Health = Layer._layerHealths[CurrentLayer];
         CurrentState = State.Alive;
-
+        ChangedVariant(Properties._shapeVariant);
         UpdateGraphics();
     }
     public virtual void Update()

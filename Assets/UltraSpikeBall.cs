@@ -10,6 +10,10 @@ public class UltraSpikeBall : SpikeBall
         _attackDamage = _spikeTower.Properties._attackDamage + _additionalAttackDamage;
         _pierce = 1;
     }
+    private void FixedUpdate()
+    {
+        transform.Rotate(new Vector3(0, 0, 7));
+    }
     /// <summary>
     /// refactored for 4 directions instead of <see cref="SpikeBall.Explode(GameObject)"/> which is 8 directions
     /// </summary>
@@ -31,6 +35,7 @@ public class UltraSpikeBall : SpikeBall
             projectile.isDirect = false;
             projectile.Pierce = 1;
             projectile.transform.rotation = Quaternion.FromToRotation(Vector2.right, dirs[i]);
+            projectile.GetComponent<SpriteRenderer>().sprite = GetComponent<SpriteRenderer>().sprite;
         }
         Destroy(this.gameObject);
     }

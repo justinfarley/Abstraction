@@ -15,7 +15,7 @@ public class SpikeBall : Projectile
     }
     private void FixedUpdate()
     {
-        //transform.Rotate(new Vector3(0, 0, Random.Range(-2,3)));
+        transform.Rotate(new Vector3(0, 0, 7));
     }
     public override void OnTriggerEnter2D(Collider2D collision)
     {

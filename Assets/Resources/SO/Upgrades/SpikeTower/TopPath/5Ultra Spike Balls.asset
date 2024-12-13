@@ -19,10 +19,10 @@ MonoBehaviour:
   DamageIncrease: 10
   AttackDelayDecrease: 0.3
   RangeIncrease: 1.5
-  ProjectileSpeedIncrease: 1
+  ProjectileSpeedIncrease: 0.5
   ProjectileTravelDistanceIncrease: 10
   DamageTypesToAdd: 
   DebuffsToAdd: 
   canHitCamo: 0
-  upgradeSprite: {fileID: 0}
+  upgradeSprite: {fileID: 21300000, guid: 1d645ca467bfbdb48a95588c3526e78b, type: 3}
   SpecialUpgrade: 4

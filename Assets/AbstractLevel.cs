@@ -38,7 +38,7 @@ public abstract class AbstractLevel : MonoBehaviour
             _description = "";
             _finalRound = 0;
             _cash = 0;
-            _startingCash = 500;
+            _startingCash = 600;
             switch (this._mode)
             {
                 case Mode.Baby:

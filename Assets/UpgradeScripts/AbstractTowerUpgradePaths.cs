@@ -30,6 +30,8 @@ public abstract class AbstractTowerUpgradePaths : MonoBehaviour
 
         _tower.Properties._projectilePierce += path[nextIndex].PierceIncrease;
         _tower.Properties._projectileSpeed += path[nextIndex].ProjectileSpeedIncrease;
+        if (_tower.Properties._projectileSpeed > GameUtils.GLOBAL_ATTACK_SPEED_CAP)
+            _tower.Properties._projectileSpeed = GameUtils.GLOBAL_ATTACK_SPEED_CAP;
         _tower.Properties._projectileTravelDistance += path[nextIndex].ProjectileTravelDistanceIncrease;
         if (!_tower.Properties._canHitCamo) //only change if you couldnt before the upgrade
         {

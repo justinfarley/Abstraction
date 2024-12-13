@@ -87,16 +87,28 @@ public class Dragable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     }
     private void DragPointerUp()
     {
-        if (_newTower == null) return;
-        if(_newTower.PlacingState != Tower.PlaceState.Placing) return;
         _mouseDown = false;
-        if (_newTower.GetComponent<Tower>().CanBePlaced)
+        if (_newTower == null)
         {
-            PlaceTower();
+            ResetDragable();
+            return;
         }
+        if(_newTower.PlacingState != Tower.PlaceState.Placing)
+        {
+            ResetDragable();
+            return;
+        }
+        if (!_newTower.GetComponent<Tower>().CanBePlaced)
+        {
+            ResetDragable();
+            return;
+        }
+        _escToCancelText.gameObject.SetActive(false);
+        PlaceTower();
     }
     private void PlaceTower()
     {
+        print("placed");
         _escToCancelText.gameObject.SetActive(false);
         _newTower.GetComponent<Tower>().TowerDeselected();
         _newTower.PlacingState = Tower.PlaceState.Placed;
@@ -105,6 +117,7 @@ public class Dragable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     }
     private void ResetDragable()
     {
+        print("reset");
         Destroy(_newTower.gameObject);
         GameUtils.IsPlacing = false;
         _escToCancelText.gameObject.SetActive(false);

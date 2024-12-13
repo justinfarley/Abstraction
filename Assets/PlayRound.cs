@@ -20,7 +20,7 @@ public class PlayRound : MonoBehaviour
     [SerializeField] private int _startRound = 2;
     private Toggle _fastForwardSpeed;
     private Button _play;
-    private const float _fastTime = 2f;
+    private const float _fastTime = 3f;
     private const float _normalTime = 1f;
     private State _state;
     private bool _wasFast = false;
